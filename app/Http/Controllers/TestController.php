@@ -14,11 +14,11 @@ class TestController extends Controller
         return view('main');
     }
 
-    public function create_url($request, $Cc, $Bcc)
+    public function create_url($to, $Cc, $Bcc, $subject, $letterBody)
     {
-        $to = $request->to;
-        $subject = $request->subject;
-        $letterBody = $request->letterBody;
+        // $to = $request->to;
+        // $subject = $request->subject;
+        // $letterBody = $request->letterBody;
 
         $httpsmail = "https://mail.google.com/mail/?view=cm&fs=1&to=";
 
@@ -34,7 +34,8 @@ class TestController extends Controller
 
     public function newUrl(Request $request)
     {
-
+        $to = $request->to;
+        $subject = $request->subject;
 
         // $detail_data = TestController::create_url($request);
 
@@ -85,9 +86,9 @@ class TestController extends Controller
             $Bcc = $_POST['Bcc4'];
         }
 
-        $url = TestController::create_url($request, $Cc, $Bcc);
-        $to = $request->to;
-        $subject = $request->subject;
+        $letterBody = $request->letterBody;
+
+        $url = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
         $letterBody = str_replace("\r\n", "<br>", $request->letterBody);
         return view("newUrl", compact('to', 'Cc', 'Bcc', 'subject', 'letterBody', 'url'));
     }
@@ -96,7 +97,7 @@ class TestController extends Controller
     {
         $user_id = Auth::user()->id;
         $urls = Mail::where('user_id', $user_id)->get();
-        // return ($urls);
+
         return view('mypage', compact('urls'));
     }
 
