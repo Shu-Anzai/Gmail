@@ -24,7 +24,33 @@ class TestController extends Controller
 
         $noNewLine = str_replace("\r\n", "%0D%0A", $letterBody);
 
-        $url = $httpsmail.$to."&cc=".$Cc."&bcc=".$Bcc."&su=".$subject."&body=".$noNewLine;
+
+        #入力していない部分はURLに含まないように選別
+        if ($Cc == "") {
+            $Cc_spec = "";
+        }else{
+            $Cc_spec = "&cc=".$Cc;
+        }
+
+        if ($Bcc == "") {
+            $Bcc_spec = "";
+        }else{
+            $Bcc_spec = "&bcc=".$Bcc;
+        }
+
+        if ($subject == "") {
+            $subject_spec = "";
+        }else{
+            $subject_spec = "&su=".$subject;
+        }
+
+        if ($letterBody == "") {
+            $body_spec = "";
+        }else{
+            $body_spec = "&body=".$noNewLine;
+        }
+
+        $url = $httpsmail.$to.$Cc_spec.$Bcc_spec.$subject_spec.$body_spec;
 
         return $url;
 
@@ -39,6 +65,7 @@ class TestController extends Controller
 
         // $detail_data = TestController::create_url($request);
 
+        // ４つの入力欄のうち、実際に入力したもののみ,で繋げてをURLの関数に引き渡す
         $Cc = "";
         if (($_POST['Cc1'] !== "")) {
             $Cc = $_POST['Cc1'];
@@ -62,7 +89,7 @@ class TestController extends Controller
             $Cc = $_POST['Cc4'];
         }
 
-
+        // ４つの入力欄のうち、実際に入力したもののみ,で繋げてをURLの関数に引き渡す
         $Bcc = "";
         if (($_POST['Bcc1'] !== "")) {
             $Bcc = $_POST['Bcc1'];
@@ -88,13 +115,16 @@ class TestController extends Controller
 
         $letterBody = $request->letterBody;
 
-
+        // URLを作成
         $url = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
 
-        if ($url == "https://mail.google.com/mail/?view=cm&fs=1&to=&cc=&bcc=&su=&body=") {
+        // URLが何も入力していないものならエラー用の変数として入力用のページにリダイレクト
+        if ($url == "https://mail.google.com/mail/?view=cm&fs=1&to=") {
             return view("main", compact('url'));
         }
 
+        // 本文の改行をHTMLで表示できるように一時的に置換
+        // （実際にユーザーが扱うのはURLになるため、DBにはこのまま入れて問題ない？？）
         $letterBody = str_replace("\r\n", "<br>", $request->letterBody);
         return view("newUrl", compact('to', 'Cc', 'Bcc', 'subject', 'letterBody', 'url'));
     }
