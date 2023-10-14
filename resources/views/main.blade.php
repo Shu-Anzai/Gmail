@@ -15,6 +15,11 @@
         </form>
     </header>
     <h1>Gmail URL Maker</h1>
+    @php
+        if (isset($url)) {
+            echo "<h1>必ず1つは埋めてください。</h1>";
+        }
+    @endphp
     <form action="" method="post">
         <p>To</p>
         <input type="email" name="to" id="to">

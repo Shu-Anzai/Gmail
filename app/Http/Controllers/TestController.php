@@ -88,7 +88,13 @@ class TestController extends Controller
 
         $letterBody = $request->letterBody;
 
+
         $url = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
+
+        if ($url == "https://mail.google.com/mail/?view=cm&fs=1&to=&cc=&bcc=&su=&body=") {
+            return view("main", compact('url'));
+        }
+
         $letterBody = str_replace("\r\n", "<br>", $request->letterBody);
         return view("newUrl", compact('to', 'Cc', 'Bcc', 'subject', 'letterBody', 'url'));
     }
