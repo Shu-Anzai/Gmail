@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+// use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -12,7 +13,7 @@ class LoginController extends Controller
     public function redirectToGoogle()
     {
         // Google へのリダイレクト
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google');
     }
 
     public function handleGoogleCallback()

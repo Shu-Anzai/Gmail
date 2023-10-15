@@ -25,16 +25,16 @@
         <input type="email" name="to" id="to">
 
         <p>Cc</p>
-        <input type="email" name="Cc1" id="Cc">
-        <input type="email" name="Cc2" id="Cc">
-        <input type="email" name="Cc3" id="Cc">
-        <input type="email" name="Cc4" id="Cc">
+        <input type="email" name="Cc1">
+        <input type="email" name="Cc2">
+        <input type="email" name="Cc3">
+        <input type="email" name="Cc4">
 
         <p>Bcc</p>
-        <input type="email" name="Bcc1" id="Bcc">
-        <input type="email" name="Bcc2" id="Bcc">
-        <input type="email" name="Bcc3" id="Bcc">
-        <input type="email" name="Bcc4" id="Bcc">
+        <input type="email" name="Bcc1">
+        <input type="email" name="Bcc2">
+        <input type="email" name="Bcc3">
+        <input type="email" name="Bcc4">
 
         <p>件名</p>
         <input type="text" name="subject" id="subject">
