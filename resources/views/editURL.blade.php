@@ -16,17 +16,27 @@
         <p>To</p>
         <input type="email" name="to" value="{{$target_url[0]->to}}">
 
-        {{-- <p>Cc</p>
-        <input type="email" name="Cc1" value="{{}}">
-        <input type="email" name="Cc2" value="{{}}">
-        <input type="email" name="Cc3" value="{{}}">
-        <input type="email" name="Cc4" value="{{}}">
+        <p>Cc</p>
+        @foreach ($target_url[0]->Cc as $key => $Cc)
+            @if ($Cc !== "")
+                <input type='email' name='Cc{{ $key + 1 }}' value='{{ $Cc }}'>
+            @elseif ($key < 4)
+                @for ($i = $key; $i < 4; $i++)
+                    <input type='email' name='Cc{{ $i + 1 }}' value='{{ $Cc }}'>
+                @endfor
+            @endif
+        @endforeach
 
         <p>Bcc</p>
-        <input type="email" name="Bcc1" value="{{}}">
-        <input type="email" name="Bcc2" value="{{}}">
-        <input type="email" name="Bcc3" value="{{}}">
-        <input type="email" name="Bcc4" value="{{}}"> --}}
+        @foreach ($target_url[0]->Bcc as $key => $Bcc)
+            @if ($Bcc !== "")
+                <input type='email' name='Bcc{{ $key + 1 }}' value='{{ $Bcc }}'>
+            @elseif ($key < 4)
+                @for ($i = $key; $i < 4; $i++)
+                    <input type='email' name='Bcc{{ $i + 1 }}' value='{{ $Bcc }}'>
+                @endfor
+            @endif
+        @endforeach
 
         <p>件名</p>
         <input type="text" name="subject" value="{{$target_url[0]->subject}}">
@@ -39,7 +49,7 @@
         <input type="submit" value="保存">
         @csrf
     </form>
-    <div>{{$target_url}}</div>
+    {{-- <div>{{$target_url}}</div> --}}
 
 </body>
 </html>

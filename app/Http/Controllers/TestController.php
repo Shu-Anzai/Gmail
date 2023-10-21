@@ -177,6 +177,13 @@ class TestController extends Controller
     public function edit($id)
     {
         $target_url = Mail::where('id', $id)->get();
+
+            $target_url[0]->Cc = explode(",", $target_url[0]->Cc);
+
+            $target_url[0]->Bcc = explode(",", $target_url[0]->Bcc);
+
+
+        $target_url[0]->letter_body = str_replace("<br>", "\r\n", $target_url[0]->letter_body);
         return view("editURL", compact('target_url'));
     }
 }
