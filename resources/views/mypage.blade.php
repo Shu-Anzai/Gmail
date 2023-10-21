@@ -14,7 +14,10 @@
         </form>
     </header>
     <?php
+        use app\Http\Controllers\Testcontroller;
+
         foreach ($urls as $key => $url) {
+
             $name = $url->name;
             $to = $url->to;
             $Cc = $url->cc;
@@ -30,6 +33,7 @@
                 echo "<p>".$Bcc."</p>";
                 echo "<p>".$subject."</p>";
                 echo "<p>".$letterBody."</p>";
+                echo "<a href=".$URL.">開く</a>";
                 echo "<p>".$key."</p>";
                 echo "<form action='/edit/{$id}' method='get'><button type='submit'>edit</button></form>";
             echo "</div><br>";

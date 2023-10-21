@@ -134,7 +134,16 @@ class TestController extends Controller
         $user_id = Auth::user()->id;
         $urls = Mail::where('user_id', $user_id)->get();
 
-        return view('mypage', compact('urls'));
+        foreach ($urls as $key => $url) {
+
+            $to = $url->to;
+            $Cc = $url->Cc;
+            $Bcc = $url->Bcc;
+            $subject = $url->subject;
+            $letterBody = str_replace("<br>","\r\n",$url->letter_body);
+            $URL = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
+        }
+        return view('mypage', compact('urls', 'URL'));
     }
 
     public function login()
@@ -167,6 +176,7 @@ class TestController extends Controller
 
     public function edit($id)
     {
-        return($id."番の編集画面");
+        $target_url = Mail::where('id', $id)->get();
+        return view("editURL", compact('target_url'));
     }
 }
