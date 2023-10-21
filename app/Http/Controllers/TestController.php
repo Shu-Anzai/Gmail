@@ -164,4 +164,9 @@ class TestController extends Controller
 
         return redirect("/mypage");
     }
+
+    public function edit($id)
+    {
+        return($id."番の編集画面");
+    }
 }

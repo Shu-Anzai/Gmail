@@ -10,7 +10,7 @@
 <body>
     <header>
         <form action="/main" method="get">
-            <button type="submit">create URL page</button>
+            <button type="submit">Back to TOP Page</button>
         </form>
     </header>
     <?php
@@ -21,6 +21,8 @@
             $Bcc = $url->bcc;
             $subject = $url->subject;
             $letterBody = $url->letter_body;
+            $id = $url->id;
+            $key += 1;
             echo "<div>";
                 echo "<p>".$name."</p>";
                 echo "<p>".$to."</p>";
@@ -28,7 +30,9 @@
                 echo "<p>".$Bcc."</p>";
                 echo "<p>".$subject."</p>";
                 echo "<p>".$letterBody."</p>";
-            echo "</div>";
+                echo "<p>".$key."</p>";
+                echo "<form action='/edit/{$id}' method='get'><button type='submit'>edit</button></form>";
+            echo "</div><br>";
         }
     ?>
 

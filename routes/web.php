@@ -38,4 +38,6 @@ Route::post('/main', [TestController::class, 'newUrl']);
 
 Route::post('/reg', [TestController::class, 'regNewUrl']);
 
+Route::get('/edit/{id}', [TestController::class, 'edit']);
+
 require __DIR__.'/auth.php';
