@@ -12,31 +12,38 @@
             echo "<h1>必ず1つは埋めてください。</h1>";
         }
     @endphp
-    <form action="" method="post">
+    <form action="/edit/{{$target_url[0]->id}}" method="post">
         <p>To</p>
         <input type="email" name="to" value="{{$target_url[0]->to}}">
 
+        {{-- {{$target_url[0]}} --}}
         <p>Cc</p>
         @foreach ($target_url[0]->Cc as $key => $Cc)
             @if ($Cc !== "")
-                <input type='email' name='Cc{{ $key + 1 }}' value='{{ $Cc }}'>
-            @elseif ($key < 4)
-                @for ($i = $key; $i < 4; $i++)
-                    <input type='email' name='Cc{{ $i + 1 }}' value='{{ $Cc }}'>
-                @endfor
+                <input type="email" name="Cc{{ $key + 1 }}" value="{{ $Cc }}">
+            @else
+                @php
+                    $key = -1;
+                @endphp
             @endif
         @endforeach
+        @for ($i = $key +1; $i < 4; $i++)
+            <input type='email' name='Cc{{ $i + 1 }}'>
+        @endfor
 
         <p>Bcc</p>
         @foreach ($target_url[0]->Bcc as $key => $Bcc)
             @if ($Bcc !== "")
-                <input type='email' name='Bcc{{ $key + 1 }}' value='{{ $Bcc }}'>
-            @elseif ($key < 4)
-                @for ($i = $key; $i < 4; $i++)
-                    <input type='email' name='Bcc{{ $i + 1 }}' value='{{ $Bcc }}'>
-                @endfor
+                <input type="email" name="Bcc{{ $key + 1 }}" value="{{ $Bcc }}">
+            @else
+                @php
+                    $key = -1;
+                @endphp
             @endif
         @endforeach
+        @for ($i = $key +1; $i < 4; $i++)
+            <input type='email' name='Bcc{{ $i + 1 }}'>
+        @endfor
 
         <p>件名</p>
         <input type="text" name="subject" value="{{$target_url[0]->subject}}">
@@ -49,7 +56,6 @@
         <input type="submit" value="保存">
         @csrf
     </form>
-    {{-- <div>{{$target_url}}</div> --}}
 
 </body>
 </html>

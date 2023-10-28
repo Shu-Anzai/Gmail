@@ -56,15 +56,8 @@ class TestController extends Controller
 
     }
 
-
-
-    public function newUrl(Request $request)
+    public function ConnectCc()
     {
-        $to = $request->to;
-        $subject = $request->subject;
-
-        // $detail_data = TestController::create_url($request);
-
         // ４つの入力欄のうち、実際に入力したもののみ,で繋げてをURLの関数に引き渡す
         $Cc = "";
         if (($_POST['Cc1'] !== "")) {
@@ -89,6 +82,11 @@ class TestController extends Controller
             $Cc = $_POST['Cc4'];
         }
 
+        return $Cc;
+    }
+
+    public function ConnectBcc()
+    {
         // ４つの入力欄のうち、実際に入力したもののみ,で繋げてをURLの関数に引き渡す
         $Bcc = "";
         if (($_POST['Bcc1'] !== "")) {
@@ -112,6 +110,17 @@ class TestController extends Controller
         }elseif(($_POST['Bcc4'] !== "")){
             $Bcc = $_POST['Bcc4'];
         }
+
+        return $Bcc;
+    }
+
+    public function newUrl(Request $request)
+    {
+        $to = $request->to;
+        $subject = $request->subject;
+
+        $Cc = TestController::ConnectCc();
+        $Bcc = TestController::ConnectBcc();
 
         $letterBody = $request->letterBody;
 
@@ -178,12 +187,45 @@ class TestController extends Controller
     {
         $target_url = Mail::where('id', $id)->get();
 
-            $target_url[0]->Cc = explode(",", $target_url[0]->Cc);
+            $target_url[0]->Cc = explode(",", $target_url[0]->cc);
 
-            $target_url[0]->Bcc = explode(",", $target_url[0]->Bcc);
+            $target_url[0]->Bcc = explode(",", $target_url[0]->bcc);
 
 
         $target_url[0]->letter_body = str_replace("<br>", "\r\n", $target_url[0]->letter_body);
         return view("editURL", compact('target_url'));
+    }
+
+    public function updateUrl(Request $request, $id)
+    {
+        $to = $request->to;
+        $subject = $request->subject;
+
+        $Cc = TestController::ConnectCc();
+        $Bcc = TestController::ConnectBcc();
+
+        $letterBody = $request->letterBody;
+
+        // URLを作成
+        $url = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
+
+        // URLが何も入力していないものならエラー用の変数として入力用のページにリダイレクト
+        if ($url == "https://mail.google.com/mail/?view=cm&fs=1&to=") {
+            return view("editURL", compact('url'));
+        }
+
+        // 本文の改行をHTMLで表示できるように一時的に置換
+        // （実際にユーザーが扱うのはURLになるため、DBにはこのまま入れて問題ない？？）
+        $letterBody = str_replace("\r\n", "<br>", $request->letterBody);
+
+        $target_url = Mail::where('id', $id)->get();
+        $name = $target_url[0]->name;
+        return view("confirmUrl", compact('to', 'Cc', 'Bcc', 'subject', 'letterBody', 'url', 'name', 'id'));
+
+    }
+
+    public function save(Request $request, $id)
+    {
+
     }
 }
