@@ -150,9 +150,9 @@ class TestController extends Controller
             $Bcc = $url->Bcc;
             $subject = $url->subject;
             $letterBody = str_replace("<br>","\r\n",$url->letter_body);
-            $URL = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
+            $url->URL = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
         }
-        return view('mypage', compact('urls', 'URL'));
+        return view('mypage', compact('urls'));
     }
 
     public function login()
@@ -226,6 +226,17 @@ class TestController extends Controller
 
     public function save(Request $request, $id)
     {
+        $data = Mail::find($id);
+        $data->name = $request->url_name;
+        $data->to = $request->to;
+        $data->cc = $request->Cc;
+        $data->bcc = $request->Bcc;
+        $data->subject = $request->subject;
+        $data->letter_body = $request->letterBody;
+
+        $data->save();
+
+        return redirect("/mypage");
 
     }
 }

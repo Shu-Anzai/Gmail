@@ -23,6 +23,7 @@
             $Bcc = $url->bcc;
             $subject = $url->subject;
             $letterBody = $url->letter_body;
+            $URL = $url->URL;
             $id = $url->id;
             $key += 1;
             echo "<div>";
