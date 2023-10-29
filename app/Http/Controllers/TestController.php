@@ -56,71 +56,27 @@ class TestController extends Controller
 
     }
 
-    public function ConnectCc()
+    public function ConnectFields($recievers)
     {
-        // ４つの入力欄のうち、実際に入力したもののみ,で繋げてをURLの関数に引き渡す
-        $Cc = "";
-        if (($_POST['Cc1'] !== "")) {
-            $Cc = $_POST['Cc1'];
+        $values = [];
+        for ($i = 1; $i <= 4; $i++) {
+            $fieldValue = $_POST[$recievers . $i];
+            if (!empty($fieldValue)) {
+                $values[] = $fieldValue;
+            }
         }
 
-        if (($Cc !== "") && ($_POST['Cc2'] !== "")) {
-            $Cc = $Cc . "," . $_POST['Cc2'];
-        }elseif(($_POST['Cc2'] !== "")){
-            $Cc = $_POST['Cc2'];
-        }
-
-        if (($Cc !== "") && ($_POST['Cc3'] !== "")) {
-            $Cc = $Cc . "," . $_POST['Cc3'];
-        }elseif(($_POST['Cc3'] !== "")){
-            $Cc = $_POST['Cc3'];
-        }
-
-        if (($Cc !== "") && ($_POST['Cc4'] !== "")) {
-            $Cc = $Cc . "," . $_POST['Cc4'];
-        }elseif(($_POST['Cc4'] !== "")){
-            $Cc = $_POST['Cc4'];
-        }
-
-        return $Cc;
+        return implode(',', $values);
     }
 
-    public function ConnectBcc()
-    {
-        // ４つの入力欄のうち、実際に入力したもののみ,で繋げてをURLの関数に引き渡す
-        $Bcc = "";
-        if (($_POST['Bcc1'] !== "")) {
-            $Bcc = $_POST['Bcc1'];
-        }
-
-        if (($Bcc !== "") && ($_POST['Bcc2'] !== "")) {
-            $Bcc = $Bcc . "," . $_POST['Bcc2'];
-        }elseif(($_POST['Bcc2'] !== "")){
-            $Bcc = $_POST['Bcc2'];
-        }
-
-        if (($Bcc !== "") && ($_POST['Bcc3'] !== "")) {
-            $Bcc = $Bcc . "," . $_POST['Bcc3'];
-        }elseif(($_POST['Bcc3'] !== "")){
-            $Bcc = $_POST['Bcc3'];
-        }
-
-        if (($Bcc !== "") && ($_POST['Bcc4'] !== "")) {
-            $Bcc = $Bcc . "," . $_POST['Bcc4'];
-        }elseif(($_POST['Bcc4'] !== "")){
-            $Bcc = $_POST['Bcc4'];
-        }
-
-        return $Bcc;
-    }
 
     public function newUrl(Request $request)
     {
         $to = $request->to;
         $subject = $request->subject;
 
-        $Cc = TestController::ConnectCc();
-        $Bcc = TestController::ConnectBcc();
+        $Cc = Testcontroller::ConnectFields('Cc');
+        $Bcc = Testcontroller::ConnectFields('Bcc');
 
         $letterBody = $request->letterBody;
 
@@ -162,21 +118,14 @@ class TestController extends Controller
 
     public function regNewUrl(Request $request)
     {
-        $to = $request->to;
-        $Cc = $request->Cc;
-        $Bcc = $request->Bcc;
-        $subject = $request->subject;
-        $letterBody = $request->letterBody;
-        $name = $request->url_name;
-
         $new_url = new Mail();
         $new_url->user_id = auth()->user()->id;
-        $new_url->name = $name;
-        $new_url->to = $to;
-        $new_url->cc = $Cc;
-        $new_url->bcc = $Bcc;
-        $new_url->subject = $subject;
-        $new_url->letter_body = $letterBody;
+        $new_url->name = $request->url_name;
+        $new_url->to = $request->to;
+        $new_url->cc = $request->Cc;
+        $new_url->bcc = $request->Bcc;
+        $new_url->subject = $request->subject;
+        $new_url->letter_body = $request->letterBody;
 
         $new_url -> save();
 
@@ -201,8 +150,8 @@ class TestController extends Controller
         $to = $request->to;
         $subject = $request->subject;
 
-        $Cc = TestController::ConnectCc();
-        $Bcc = TestController::ConnectBcc();
+        $Cc = Testcontroller::ConnectFields('Cc');
+        $Bcc = Testcontroller::ConnectFields('Bcc');
 
         $letterBody = $request->letterBody;
 
@@ -238,5 +187,12 @@ class TestController extends Controller
 
         return redirect("/mypage");
 
+    }
+
+    public function delete($id)
+    {
+        $delete_url = Mail::find($id);
+        $delete_url->delete();
+        return redirect("/mypage");
     }
 }

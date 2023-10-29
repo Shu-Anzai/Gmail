@@ -44,4 +44,6 @@ Route::post('/edit/{id}', [TestController::class, 'updateUrl']);
 
 Route::post('/save/{id}', [TestController::class, 'save']);
 
+Route::get('/delete/{id}', [TestController::class, 'delete']);
+
 require __DIR__.'/auth.php';
