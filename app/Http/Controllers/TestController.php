@@ -20,12 +20,18 @@ class TestController extends Controller
         // $subject = $request->subject;
         // $letterBody = $request->letterBody;
 
-        $httpsmail = "https://mail.google.com/mail/?view=cm&fs=1&to=";
+        $httpsmail = "https://mail.google.com/mail/?view=cm&fs=1";
 
         $noNewLine = str_replace("\r\n", "%0D%0A", $letterBody);
 
 
         #入力していない部分はURLに含まないように選別
+        if ($to == "") {
+            $to_spec = "";
+        }else{
+            $to_spec = "&to=".$to;
+        }
+
         if ($Cc == "") {
             $Cc_spec = "";
         }else{
@@ -50,7 +56,7 @@ class TestController extends Controller
             $body_spec = "&body=".$noNewLine;
         }
 
-        $url = $httpsmail.$to.$Cc_spec.$Bcc_spec.$subject_spec.$body_spec;
+        $url = $httpsmail.$to_spec.$Cc_spec.$Bcc_spec.$subject_spec.$body_spec;
 
         return $url;
 
@@ -72,19 +78,17 @@ class TestController extends Controller
 
     public function newUrl(Request $request)
     {
-        $to = $request->to;
-        $subject = $request->subject;
-
+        $to = Testcontroller::ConnectFields('To');
         $Cc = Testcontroller::ConnectFields('Cc');
         $Bcc = Testcontroller::ConnectFields('Bcc');
-
+        $subject = $request->subject;
         $letterBody = $request->letterBody;
 
         // URLを作成
         $url = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
 
         // URLが何も入力していないものならエラー用の変数として入力用のページにリダイレクト
-        if ($url == "https://mail.google.com/mail/?view=cm&fs=1&to=") {
+        if ($url == "https://mail.google.com/mail/?view=cm&fs=1") {
             return view("main", compact('url'));
         }
 
@@ -136,8 +140,8 @@ class TestController extends Controller
     {
         $target_url = Mail::where('id', $id)->get();
 
+            $target_url[0]->to = explode(",", $target_url[0]->to);
             $target_url[0]->Cc = explode(",", $target_url[0]->cc);
-
             $target_url[0]->Bcc = explode(",", $target_url[0]->bcc);
 
 
@@ -147,19 +151,17 @@ class TestController extends Controller
 
     public function updateUrl(Request $request, $id)
     {
-        $to = $request->to;
-        $subject = $request->subject;
-
+        $to = Testcontroller::ConnectFields('to');
         $Cc = Testcontroller::ConnectFields('Cc');
         $Bcc = Testcontroller::ConnectFields('Bcc');
-
+        $subject = $request->subject;
         $letterBody = $request->letterBody;
 
         // URLを作成
         $url = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
 
         // URLが何も入力していないものならエラー用の変数として入力用のページにリダイレクト
-        if ($url == "https://mail.google.com/mail/?view=cm&fs=1&to=") {
+        if ($url == "https://mail.google.com/mail/?view=cm&fs=1") {
             return view("editURL", compact('url'));
         }
 

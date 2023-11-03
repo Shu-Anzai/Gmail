@@ -10,7 +10,7 @@
 
     <h2>テンプレート内容</h2>
     <?php
-    if ($to == null) {
+    if ($to == "") {
         echo "<h3>To</h3><p>宛先なし</p>";
     } else {
         echo "<h3>To</h3><p>$to</p>";

@@ -14,7 +14,19 @@
     @endphp
     <form action="/edit/{{$target_url[0]->id}}" method="post">
         <p>To</p>
-        <input type="email" name="to" value="{{$target_url[0]->to}}">
+        @foreach ($target_url[0]->to as $key => $to)
+            @if ($to !== "")
+                <input type="email" name="To{{ $key + 1 }}" value="{{ $to }}">
+            @else
+                @php
+                    $key = -1;
+                @endphp
+            @endif
+        @endforeach
+        @for ($i = $key +1; $i < 4; $i++)
+        <input type='email' name='To{{ $i + 1 }}'>
+        @endfor
+
 
         {{-- {{$target_url[0]}} --}}
         <p>Cc</p>
