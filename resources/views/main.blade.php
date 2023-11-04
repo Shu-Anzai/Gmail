@@ -12,8 +12,8 @@
             <button type="submit" class="btn">my page</button>
         </form>
     </header> --}}
-    <div class=”container”>
-        <div class="col-6">
+    <div class="container">
+        <div class="col-10">
             <h1>Gmail URL Maker</h1>
             @php
                 if (isset($url)) {
@@ -24,46 +24,46 @@
 
                 <div class="row m-3">
                     <div class="col">
-                        <input type="email" name="To1" class="form-control" placeholder="To1">
+                        <input type="email" name="To" class="form-control" placeholder="To">
                     </div>
                     <div class="col">
-                        <input type="email" name="To2" class="form-control" placeholder="To2">
+                        <input type="email" name="To" class="form-control" placeholder="To">
                     </div>
                     <div class="col">
-                        <input type="email" name="To3" class="form-control" placeholder="To3">
+                        <input type="email" name="To" class="form-control" placeholder="To">
                     </div>
                     <div class="col">
-                        <input type="email" name="To4" class="form-control" placeholder="To4">
-                    </div>
-                </div>
-
-                <div class="row m-3">
-                    <div class="col">
-                        <input type="email" name="Cc1" class="form-control" placeholder="Cc1">
-                    </div>
-                    <div class="col">
-                        <input type="email" name="Cc2" class="form-control" placeholder="Cc2">
-                    </div>
-                    <div class="col">
-                        <input type="email" name="Cc3" class="form-control" placeholder="Cc3">
-                    </div>
-                    <div class="col">
-                        <input type="email" name="Cc4" class="form-control" placeholder="Cc4">
+                        <input type="email" name="To" class="form-control" placeholder="To">
                     </div>
                 </div>
 
                 <div class="row m-3">
                     <div class="col">
-                        <input type="email" name="Bcc1" class="form-control" placeholder="Bcc1">
+                        <input type="email" name="Cc" class="form-control" placeholder="Cc">
                     </div>
                     <div class="col">
-                        <input type="email" name="Bcc2" class="form-control" placeholder="Bcc2">
+                        <input type="email" name="Cc" class="form-control" placeholder="Cc">
                     </div>
                     <div class="col">
-                        <input type="email" name="Bcc3" class="form-control" placeholder="Bcc3">
+                        <input type="email" name="Cc" class="form-control" placeholder="Cc">
                     </div>
                     <div class="col">
-                        <input type="email" name="Bcc4" class="form-control" placeholder="Bcc4">
+                        <input type="email" name="Cc" class="form-control" placeholder="Cc">
+                    </div>
+                </div>
+
+                <div class="row m-3">
+                    <div class="col">
+                        <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
+                    </div>
+                    <div class="col">
+                        <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
+                    </div>
+                    <div class="col">
+                        <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
+                    </div>
+                    <div class="col">
+                        <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
                     </div>
                 </div>
 
@@ -80,7 +80,9 @@
                 </div>
 
                 <div class="row m-3">
-                    <input type="submit" value="URLを作成" class="col form-control">
+                    <div class="col">
+                        <input type="submit" value="URLを作成" class="form-control">
+                    </div>
                 </div>
                 @csrf
             </form>

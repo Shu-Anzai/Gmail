@@ -14,6 +14,11 @@ class TestController extends Controller
         return view('main');
     }
 
+    public function test()
+    {
+        return view('main-test');
+    }
+
     public function create_url($to, $Cc, $Bcc, $subject, $letterBody)
     {
         // $to = $request->to;

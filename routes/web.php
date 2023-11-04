@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/main', [TestController::class, 'index'])->middleware('auth');
 
+Route::get('/test', [Testcontroller::class, 'test']);
+
 Route::get('/mypage', [TestController::class, 'myUrl'])->middleware('auth');
 
 Route::post('/main', [TestController::class, 'newUrl']);
