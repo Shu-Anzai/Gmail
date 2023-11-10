@@ -34,8 +34,10 @@
                     </div>
 
                     <div class="row m-3">
-                        <p class="col" name="ResultTo">To: </p>
+                        <p class="col" name="ResultTo"></p>
                     </div>
+
+                    <input type="hidden" name="ToFinResult">
 
                     <div class="row m-3">
                         <div class="col">
@@ -53,6 +55,12 @@
                     </div>
 
                     <div class="row m-3">
+                        <p class="col" name="ResultCc"></p>
+                    </div>
+
+                    <input type="hidden" name="CcFinResult">
+
+                    <div class="row m-3">
                         <div class="col">
                             <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
                         </div>
@@ -66,6 +74,12 @@
                             <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
                         </div>
                     </div>
+
+                    <div class="row m-3">
+                        <p class="col" name="ResultBcc"></p>
+                    </div>
+
+                    <input type="hidden" name="BccFinResult">
 
                     <div class="row m-3">
                         <div class="col">
