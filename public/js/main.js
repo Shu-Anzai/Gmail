@@ -1,14 +1,17 @@
 let Tos = document.querySelectorAll("input[name=To]");
 let ResultTo = document.querySelector("p[name=ResultTo]");
 let torow = document.getElementById('torow');
+let tobtn = document.querySelector("button[name=tobtn]");
 
 let Ccs = document.querySelectorAll("input[name=Cc]");
 let ResultCc = document.querySelector("p[name=ResultCc]");
 let ccrow = document.getElementById('ccrow');
+let ccbtn = document.querySelector("button[name=ccbtn]");
 
 let Bccs = document.querySelectorAll("input[name=Bcc]");
 let ResultBcc = document.querySelector("p[name=ResultBcc]");
 let bccrow = document.getElementById('bccrow');
+let bccbtn = document.querySelector("button[name=bccbtn]");
 
 function ConnectTo() {
   let result = '';
@@ -34,6 +37,25 @@ function ConnectTo() {
 
 //   console.log(result);
 }
+
+tobtn.addEventListener('click', () => {
+    // const formCount = Tos.length + 1;
+
+    const newForm = document.createElement('input');
+    newForm.type = 'email';
+    newForm.name = 'To';
+    // newForm.class = 'form-control';
+    newForm.classList.add('form-control');
+    newForm.placeholder = 'To';
+
+    const inputDiv = document.createElement('div');
+    inputDiv.class = 'col';
+    // inputDiv.name = 'inputdiv';
+    inputDiv.classList.add('col');
+    inputDiv.appendChild(newForm);
+
+    torow.appendChild(inputDiv);
+});
 
 function ConnectCc() {
   let result = '';

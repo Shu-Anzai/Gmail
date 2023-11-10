@@ -20,8 +20,19 @@
                         echo "<h1>必ず1つは埋めてください。</h1>";
                     }
                 @endphp
-                <button name="tobtn" class="btn primary">Toの入力欄を増やす</button>
+
                 <form method="post" class="form-group">
+                    <div class="row m-3">
+                        <div class="col">
+                            <button type="button" name="tobtn" class="btn btn-secondary">Toの入力欄を増やす</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" name="ccbtn" class="btn btn-secondary">Ccの入力欄を増やす</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" name="bccbtn" class="btn btn-secondary">Bccの入力欄を増やす</button>
+                        </div>
+                    </div>
 
                     <div class="row m-3" id="torow">
                         <div class="col" name="inputdiv">
@@ -30,7 +41,6 @@
                         <div class="col" name="inputdiv">
                             <input type="email" name="To" class="form-control" placeholder="To">
                         </div>
-
                     </div>
 
                     <div class="row m-3">
