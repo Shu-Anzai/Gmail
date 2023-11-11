@@ -2,16 +2,19 @@ let Tos = document.querySelectorAll("input[name=To]");
 let ResultTo = document.querySelector("p[name=ResultTo]");
 let torow = document.getElementById('torow');
 let tobtn = document.querySelector("button[name=tobtn]");
+let ToFinResult = document.querySelector("input[name=ToFinResult]");
 
 let Ccs = document.querySelectorAll("input[name=Cc]");
 let ResultCc = document.querySelector("p[name=ResultCc]");
 let ccrow = document.getElementById('ccrow');
 let ccbtn = document.querySelector("button[name=ccbtn]");
+let CcFinResult = document.querySelector("input[name=CcFinResult]");
 
 let Bccs = document.querySelectorAll("input[name=Bcc]");
 let ResultBcc = document.querySelector("p[name=ResultBcc]");
 let bccrow = document.getElementById('bccrow');
 let bccbtn = document.querySelector("button[name=bccbtn]");
+let BccFinResult = document.querySelector("input[name=BccFinResult]");
 
 function ConnectTo() {
   let result = '';
@@ -55,6 +58,7 @@ tobtn.addEventListener('click', () => {
     inputDiv.appendChild(newForm);
 
     torow.appendChild(inputDiv);
+    let Tos = document.querySelectorAll("input[name=To]");
 });
 
 function ConnectCc() {
@@ -82,6 +86,27 @@ function ConnectCc() {
 //   console.log(result);
 }
 
+ccbtn.addEventListener('click', () => {
+    // const formCount = Ccs.length + 1;
+
+    const newForm = document.createElement('input');
+    newForm.type = 'email';
+    newForm.name = 'Cc';
+    // newForm.class = 'form-control';
+    newForm.classList.add('form-control');
+    newForm.placeholder = 'Cc';
+
+    const inputDiv = document.createElement('div');
+    inputDiv.class = 'col';
+    // inputDiv.name = 'inputdiv';
+    inputDiv.classList.add('col');
+    inputDiv.appendChild(newForm);
+
+    ccrow.appendChild(inputDiv);
+    let Ccs = document.querySelectorAll("input[name=Cc]");
+});
+
+
 function ConnectBcc() {
   let result = '';
 
@@ -106,6 +131,26 @@ function ConnectBcc() {
 
 //   console.log(result);
 }
+
+bccbtn.addEventListener('click', () => {
+    // const formCount = Bccs.length + 1;
+
+    const newForm = document.createElement('input');
+    newForm.type = 'email';
+    newForm.name = 'Bcc';
+    // newForm.class = 'form-control';
+    newForm.classList.add('form-control');
+    newForm.placeholder = 'Bcc';
+
+    const inputDiv = document.createElement('div');
+    inputDiv.class = 'col';
+    // inputDiv.name = 'inputdiv';
+    inputDiv.classList.add('col');
+    inputDiv.appendChild(newForm);
+
+    bccrow.appendChild(inputDiv);
+    let Bccs = document.querySelectorAll("input[name=Bcc]");
+});
 
 
 Tos.forEach(To => {

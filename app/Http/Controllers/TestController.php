@@ -83,9 +83,15 @@ class TestController extends Controller
 
     public function newUrl(Request $request)
     {
-        $to = Testcontroller::ConnectFields('To');
-        $Cc = Testcontroller::ConnectFields('Cc');
-        $Bcc = Testcontroller::ConnectFields('Bcc');
+        // $to = Testcontroller::ConnectFields('To');
+        // $Cc = Testcontroller::ConnectFields('Cc');
+        // $Bcc = Testcontroller::ConnectFields('Bcc');
+
+        // js側で定義しているFinResult系の変数がLaravel側で認識できるのかが不明
+
+        $to = $request->ToFinResult;
+        $Cc = $request->CcFinResult;
+        $Bcc = $request->BccFinResult;
         $subject = $request->subject;
         $letterBody = $request->letterBody;
 

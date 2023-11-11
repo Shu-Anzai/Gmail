@@ -24,13 +24,13 @@
                 <form method="post" class="form-group">
                     <div class="row m-3">
                         <div class="col">
-                            <button type="button" name="tobtn" class="btn btn-secondary">Toの入力欄を増やす</button>
+                            <button type="button" name="tobtn" class="btn btn-outline-secondary">Toの入力欄を増やす</button>
                         </div>
                         <div class="col">
-                            <button type="button" name="ccbtn" class="btn btn-secondary">Ccの入力欄を増やす</button>
+                            <button type="button" name="ccbtn" class="btn btn-outline-secondary">Ccの入力欄を増やす</button>
                         </div>
                         <div class="col">
-                            <button type="button" name="bccbtn" class="btn btn-secondary">Bccの入力欄を増やす</button>
+                            <button type="button" name="bccbtn" class="btn btn-outline-secondary">Bccの入力欄を増やす</button>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
 
                     <input type="hidden" name="ToFinResult">
 
-                    <div class="row m-3">
+                    <div class="row m-3" id="ccrow">
                         <div class="col">
                             <input type="email" name="Cc" class="form-control" placeholder="Cc">
                         </div>
@@ -70,7 +70,7 @@
 
                     <input type="hidden" name="CcFinResult">
 
-                    <div class="row m-3">
+                    <div class="row m-3" id="bccrow">
                         <div class="col">
                             <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
                         </div>

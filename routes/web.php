@@ -38,6 +38,8 @@ Route::get('/mypage', [TestController::class, 'myUrl'])->middleware('auth');
 
 Route::post('/main', [TestController::class, 'newUrl']);
 
+Route::post('/test', [TestController::class, 'newUrl']);
+
 Route::post('/reg', [TestController::class, 'regNewUrl']);
 
 Route::get('/edit/{id}', [TestController::class, 'edit']);
