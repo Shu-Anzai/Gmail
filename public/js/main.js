@@ -37,28 +37,25 @@ function ConnectTo() {
   }
 
   ToFinResult.value = result;
-
-//   console.log(result);
 }
 
 tobtn.addEventListener('click', () => {
-    // const formCount = Tos.length + 1;
-
     const newForm = document.createElement('input');
     newForm.type = 'email';
     newForm.name = 'To';
-    // newForm.class = 'form-control';
     newForm.classList.add('form-control');
     newForm.placeholder = 'To';
 
     const inputDiv = document.createElement('div');
-    inputDiv.class = 'col';
-    // inputDiv.name = 'inputdiv';
+    inputDiv.name = 'inputdiv';
     inputDiv.classList.add('col');
     inputDiv.appendChild(newForm);
 
     torow.appendChild(inputDiv);
-    let Tos = document.querySelectorAll("input[name=To]");
+
+    Tos = document.querySelectorAll("input[name=To]");
+    newForm.addEventListener("input", ConnectTo, false);
+    ConnectTo();
 });
 
 function ConnectCc() {
@@ -82,30 +79,26 @@ function ConnectCc() {
   }
 
   CcFinResult.value = result;
-
-//   console.log(result);
 }
 
 ccbtn.addEventListener('click', () => {
-    // const formCount = Ccs.length + 1;
-
     const newForm = document.createElement('input');
     newForm.type = 'email';
     newForm.name = 'Cc';
-    // newForm.class = 'form-control';
     newForm.classList.add('form-control');
     newForm.placeholder = 'Cc';
 
     const inputDiv = document.createElement('div');
-    inputDiv.class = 'col';
-    // inputDiv.name = 'inputdiv';
+    inputDiv.name = 'inputdiv';
     inputDiv.classList.add('col');
     inputDiv.appendChild(newForm);
 
     ccrow.appendChild(inputDiv);
-    let Ccs = document.querySelectorAll("input[name=Cc]");
-});
 
+    Ccs = document.querySelectorAll("input[name=Cc]");
+    newForm.addEventListener("input", ConnectCc, false);
+    ConnectCc();
+});
 
 function ConnectBcc() {
   let result = '';
@@ -127,30 +120,28 @@ function ConnectBcc() {
     ResultBcc.textContent = "Bcc: " + result;
   }
 
-  CcFinResult.value = result;
-
-//   console.log(result);
+  BccFinResult.value = result;
 }
 
 bccbtn.addEventListener('click', () => {
-    // const formCount = Bccs.length + 1;
-
     const newForm = document.createElement('input');
     newForm.type = 'email';
     newForm.name = 'Bcc';
-    // newForm.class = 'form-control';
     newForm.classList.add('form-control');
     newForm.placeholder = 'Bcc';
 
     const inputDiv = document.createElement('div');
-    inputDiv.class = 'col';
-    // inputDiv.name = 'inputdiv';
+    inputDiv.name = 'inputdiv';
     inputDiv.classList.add('col');
     inputDiv.appendChild(newForm);
 
     bccrow.appendChild(inputDiv);
-    let Bccs = document.querySelectorAll("input[name=Bcc]");
+
+    Bccs = document.querySelectorAll("input[name=Bcc]");
+    newForm.addEventListener("input", ConnectBcc, false);
+    ConnectBcc();
 });
+
 
 
 Tos.forEach(To => {
@@ -164,17 +155,3 @@ Bccs.forEach(Bcc => {
 });
 
 
-document.querySelector("button[name=tobtn]").addEventListener('click', () => {
-    const newForm = document.createElement("input");
-    newForm.type = "email";
-    newForm.className = "form-contol";
-    newForm.name = "To";
-    const div = document.querySelector("div");
-    div.className = "col";
-    torow.appendChild(div);
-    div.appendChild(newForm);
-
-//   newForm.addEventListener('input', calc);
-
-  Tos = document.querySelectorAll("input[name=To]");
-});
