@@ -1,17 +1,17 @@
 let Tos = document.querySelectorAll("input[name=To]");
-let ResultTo = document.querySelector("p[name=ResultTo]");
+let ResultTo = document.querySelector("div[name=ResultTo]");
 let torow = document.getElementById('torow');
 let tobtn = document.querySelector("button[name=tobtn]");
 let ToFinResult = document.querySelector("input[name=ToFinResult]");
 
 let Ccs = document.querySelectorAll("input[name=Cc]");
-let ResultCc = document.querySelector("p[name=ResultCc]");
+let ResultCc = document.querySelector("div[name=ResultCc]");
 let ccrow = document.getElementById('ccrow');
 let ccbtn = document.querySelector("button[name=ccbtn]");
 let CcFinResult = document.querySelector("input[name=CcFinResult]");
 
 let Bccs = document.querySelectorAll("input[name=Bcc]");
-let ResultBcc = document.querySelector("p[name=ResultBcc]");
+let ResultBcc = document.querySelector("div[name=ResultBcc]");
 let bccrow = document.getElementById('bccrow');
 let bccbtn = document.querySelector("button[name=bccbtn]");
 let BccFinResult = document.querySelector("input[name=BccFinResult]");
@@ -48,7 +48,7 @@ tobtn.addEventListener('click', () => {
 
     const inputDiv = document.createElement('div');
     inputDiv.name = 'inputdiv';
-    inputDiv.classList.add('col');
+    inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
 
     torow.appendChild(inputDiv);
@@ -90,7 +90,7 @@ ccbtn.addEventListener('click', () => {
 
     const inputDiv = document.createElement('div');
     inputDiv.name = 'inputdiv';
-    inputDiv.classList.add('col');
+    inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
 
     ccrow.appendChild(inputDiv);
@@ -132,7 +132,7 @@ bccbtn.addEventListener('click', () => {
 
     const inputDiv = document.createElement('div');
     inputDiv.name = 'inputdiv';
-    inputDiv.classList.add('col');
+    inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
 
     bccrow.appendChild(inputDiv);
