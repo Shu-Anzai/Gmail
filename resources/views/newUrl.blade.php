@@ -1,3 +1,10 @@
+<?php
+    if ($subject == null) {
+        $recommend = "テンプレート名";
+    } else {
+        $recommend = $subject . "のメール";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,83 +34,71 @@
         </nav>
     </header>
 
-    <div class="container text-center row">
-        {{-- <div class=""> --}}
-            <div class="col-9">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">新規テンプレート作成</h5>
-                        <div class="border rounded">
-                            <?php
-                            if ($to == "") {
-                                echo "<p class='card-text'>To:宛先なし</p>";
-                            } else {
-                                echo "<p class='card-text'>To:$to</p>";
-                            }
+    <div class="container">
+        <div class="card mx-auto w-75 my-3">
+            <div class="card-body">
+                <h5 class="card-title">新規メール登録</h5>
+                <div class="border rounded my-2">
+                    <?php
+                    if ($to == "") {
+                        echo "<p class='card-text p-2'>To:宛先なし</p>";
+                    } else {
+                        echo "<p class='card-text p-2'>To:$to</p>";
+                    }
 
-                            if ($Cc !== "") {
-                                echo "<p class='card-text'>Cc:$Cc</p>";
-                            }
+                    if ($Cc !== "") {
+                        echo "<p class='card-text p-2'>Cc:$Cc</p>";
+                    }
 
-                            if ($Bcc !== "") {
-                                echo "<p class='card-text'>Bcc:$Bcc</p>";
-                            }
-                            ?>
-                        </div>
-                        <div class="border rounded">
-                            <?php
-                            if ($subject == null) {
-                                echo "<p class='card-text'>件名:件名なし</p>";
-                            } else {
-                                echo "<p class='card-text'>件名:$subject</p>";
-                            }
-                            ?>
-                        </div>
-                        <div class="border rounded">
-                            <?php
-                            if ($letterBody == null) {
-                                echo "<p class='card-text'>本文なし</p>";
-                            } else {
-                                echo "<div>$letterBody</div>";
-                            }
-
-                            ?>
-                        </div>
-                    </div>
+                    if ($Bcc !== "") {
+                        echo "<p class='card-text p-2'>Bcc:$Bcc</p>";
+                    }
+                    ?>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <?php
-                        echo "<p>URL:$url</p>";
-                        echo "<input type='hidden' id='url' value=$url>";
-
-
-                        if ($subject == null) {
-                            $recommend = "テンプレート";
-                        } else {
-                            $recommend = $subject . "のメール";
-                        }
-                        ?>
-                    </div>
-                    <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
-                    <a href="{{$url}}" class="btn btn-link">URLを開く</a>
+                <div class="border rounded my-2">
+                    <?php
+                    if ($subject == null) {
+                        echo "<p class='card-text p-2'>件名:件名なし</p>";
+                    } else {
+                        echo "<p class='card-text p-2'>件名:$subject</p>";
+                    }
+                    ?>
                 </div>
-            </div>
-            <div class="col-3">
-
-                <form action="/reg" method="post" class="form-group">
+                <div class="border rounded my-2">
+                    <?php
+                    if ($letterBody == null) {
+                        echo "<p class='card-text p-2'>本文なし</p>";
+                    } else {
+                        echo "<p class='card-text p-2'>$letterBody</p>";
+                    }
+                    ?>
+                </div>
+                <div class="border rounded my-2">
+                    <p class="card-text p-2">URL:{{$url}}</p>
+                    <input type='hidden' id='url' value="{{$url}}">
+                </div>
+                <form action="/reg" method="post" class="form-group my-2">
                     <input type="hidden" name="to" value="{{$to}}" class="form-control">
                     <input type="hidden" name="Cc" value="{{$Cc}}" class="form-control">
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <h3>テンプレート名</h3>
                     <input type="text" name="url_name" value="{{$recommend}}" class="form-control">
-                    <input type="submit" value="登録" class="form-control">
+                    <div class="row my-2">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary">登録</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
+                        </div>
+                        <div class="col">
+                            <a href="{{$url}}" class="btn btn-outline-primary">URLを開く</a>
+                        </div>
+                    </div>
                     @csrf
                 </form>
             </div>
-        {{-- </div> --}}
+        </div>
         <script></script>
     </div>
 </body>
