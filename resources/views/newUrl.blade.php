@@ -1,19 +1,25 @@
-<?php
-    if ($subject == null) {
-        $recommend = "テンプレート名";
-    } else {
-        $recommend = $subject . "のメール";
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Gmail URL Maker</title>
+    <style>
+        .centered-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .centered-buttons .btn {
+            margin: 0 10px;
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <nav class="nav-bar navbar-expand-md navbar-light bg-light">
@@ -38,24 +44,24 @@
         <div class="card mx-auto w-75 my-3">
             <div class="card-body">
                 <h5 class="card-title">新規メール登録</h5>
-                <div class="border rounded my-2">
+                <div class="border rounded my-3">
                     <?php
-                    if ($to == "") {
+                    if ($to == null) {
                         echo "<p class='card-text p-2'>To:宛先なし</p>";
                     } else {
                         echo "<p class='card-text p-2'>To:$to</p>";
                     }
 
-                    if ($Cc !== "") {
+                    if ($Cc !== null) {
                         echo "<p class='card-text p-2'>Cc:$Cc</p>";
                     }
 
-                    if ($Bcc !== "") {
+                    if ($Bcc !== null) {
                         echo "<p class='card-text p-2'>Bcc:$Bcc</p>";
                     }
                     ?>
                 </div>
-                <div class="border rounded my-2">
+                <div class="border rounded my-3">
                     <?php
                     if ($subject == null) {
                         echo "<p class='card-text p-2'>件名:件名なし</p>";
@@ -64,7 +70,7 @@
                     }
                     ?>
                 </div>
-                <div class="border rounded my-2">
+                <div class="border rounded my-3">
                     <?php
                     if ($letterBody == null) {
                         echo "<p class='card-text p-2'>本文なし</p>";
@@ -73,7 +79,7 @@
                     }
                     ?>
                 </div>
-                <div class="border rounded my-2">
+                <div class="border rounded my-3">
                     <p class="card-text p-2">URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
@@ -83,17 +89,12 @@
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" value="{{$recommend}}" class="form-control">
-                    <div class="row my-2">
-                        <div class="col">
-                            <button type="submit" class="btn btn-outline-primary">登録</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
-                        </div>
-                        <div class="col">
-                            <a href="{{$url}}" class="btn btn-outline-primary">URLを開く</a>
-                        </div>
+                    <input type="text" name="url_name" value="下書きタイトルを入力してください。" class="form-control">
+                    <div class="centered-buttons">
+                        <a href="/main" class="btn btn-outline-danger">TOPに戻る</a>
+                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
+                        <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
+                        <button type="submit" class="btn btn-primary">保存</button>
                     </div>
                     @csrf
                 </form>
@@ -102,4 +103,5 @@
         <script></script>
     </div>
 </body>
+
 </html>
