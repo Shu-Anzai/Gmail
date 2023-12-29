@@ -155,3 +155,19 @@ Bccs.forEach(Bcc => {
 });
 
 
+// document.addEventListener('DOMContentLoaded', function () {
+//     var copyUrlButton = document.getElementById('copyUrl');
+
+//     if (copyUrlButton) {
+//         copyUrlButton.addEventListener('click', function () {
+//             var urlInput = document.getElementById('url');
+//             alert('Eventlisner');
+
+//             if (urlInput) {
+//                 urlInput.select();
+//                 document.execCommand('copy');
+//                 alert('URLがクリップボードにコピーされました！');
+//             }
+//         });
+//     }
+// });
