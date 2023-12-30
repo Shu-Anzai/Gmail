@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Gmail URL Maker</title>
+    <title>UGRL</title>
 </head>
 <body>
     <header>
         <nav class="nav-bar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid d-flex">
                 <a class="navbar-brand mr-auto" href="https://mail.google.com/mail/u/0/#inbox?compose=new">
-                    <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> Gmail URL Maker
+                    <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> UGRL
                 </a>
                 <div class=" justify-content-end">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">

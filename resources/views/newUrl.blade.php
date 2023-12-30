@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Gmail URL Maker</title>
+    <title>UGRL</title>
     <style>
         .centered-buttons {
             display: flex;
@@ -22,20 +22,21 @@
 
 <body>
     <header>
-        <nav class="nav-bar navbar-expand-md navbar-light bg-light">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid d-flex">
-                <a class="navbar-brand mr-auto" href="https://mail.google.com/mail/u/0/#inbox?compose=new">
-                    <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> Gmail URL Maker
+                <a class="navbar-brand" href="main">
+                    <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> UGRL
                 </a>
-                <div class=" justify-content-end">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/mypage">mypage</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
+                <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="mypage">mypage</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -89,7 +90,7 @@
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" value="下書きタイトルを入力してください。" class="form-control">
+                    <input type="text" name="url_name" value="下書きタイトルを入力" class="form-control">
                     <div class="centered-buttons">
                         <a href="/main" class="btn btn-outline-danger">TOPに戻る</a>
                         <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
