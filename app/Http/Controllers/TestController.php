@@ -208,4 +208,13 @@ class TestController extends Controller
         $delete_url->delete();
         return redirect("/mypage");
     }
+
+    public function inputVal($con, $title)
+    {
+        if($con){
+            $con = "<li class='list-group-item'>".$title . $con."</li>";
+        }
+        return $con;
+    }
+
 }
