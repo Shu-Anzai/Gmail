@@ -54,7 +54,9 @@
                                 echo $Cc;
                                 echo $Bcc;
                                 echo $subject;
-                                echo "<li class='list-group-item'><p class='card-text'>".$letterBody."</p></li>";
+                                if ($letterBody) {
+                                    echo "<li class='list-group-item'><p class='card-text'>".$letterBody."</p></li>";
+                                }
                             echo "</ul>";
 
                             // 横に並べるための div を追加
