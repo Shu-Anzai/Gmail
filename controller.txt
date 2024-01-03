@@ -1,86 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Mail;
-
-class TestController extends Controller
-{
-
-    public function index()
-    {
-        return view('main');
-    }
-
-    public function test()
-    {
-        return view('main-test');
-    }
-
-    public function create_url($to, $Cc, $Bcc, $subject, $letterBody)
-    {
-        // $to = $request->to;
-        // $subject = $request->subject;
-        // $letterBody = $request->letterBody;
-
-        $httpsmail = "https://mail.google.com/mail/?view=cm&fs=1";
-
-        $noNewLine = str_replace("\r\n", "%0D%0A", $letterBody);
-
-
-        #入力していない部分はURLに含まないように選別
-        if ($to == "") {
-            $to_spec = "";
-        }else{
-            $to_spec = "&to=".$to;
-        }
-
-        if ($Cc == "") {
-            $Cc_spec = "";
-        }else{
-            $Cc_spec = "&cc=".$Cc;
-        }
-
-        if ($Bcc == "") {
-            $Bcc_spec = "";
-        }else{
-            $Bcc_spec = "&bcc=".$Bcc;
-        }
-
-        if ($subject == "") {
-            $subject_spec = "";
-        }else{
-            $subject_spec = "&su=".$subject;
-        }
-
-        if ($letterBody == "") {
-            $body_spec = "";
-        }else{
-            $body_spec = "&body=".$noNewLine;
-        }
-
-        $url = $httpsmail.$to_spec.$Cc_spec.$Bcc_spec.$subject_spec.$body_spec;
-
-        return $url;
-
-    }
-
-    public function ConnectFields($recievers)
-    {
-        $values = [];
-        for ($i = 1; $i <= 4; $i++) {
-            $fieldValue = $_POST[$recievers . $i];
-            if (!empty($fieldValue)) {
-                $values[] = $fieldValue;
-            }
-        }
-
-        return implode(',', $values);
-    }
-
-
+確認画面の表示（新規登録）
     public function newUrl(Request $request)
     {
         $to = $request->ToFinResult;
@@ -103,28 +21,7 @@ class TestController extends Controller
         return view("newUrl", compact('to', 'Cc', 'Bcc', 'subject', 'letterBody', 'url'));
     }
 
-    public function myUrl()
-    {
-        $user_id = Auth::user()->id;
-        $urls = Mail::where('user_id', $user_id)->get();
-
-        foreach ($urls as $key => $url) {
-
-            $to = $url->to;
-            $Cc = $url->Cc;
-            $Bcc = $url->Bcc;
-            $subject = $url->subject;
-            $letterBody = str_replace("<br>","\r\n",$url->letter_body);
-            $url->URL = TestController::create_url($to, $Cc, $Bcc, $subject, $letterBody);
-        }
-        return view('mypage', compact('urls'));
-    }
-
-    public function login()
-    {
-        return view('login');
-    }
-
+DBへ保存（新規登録）
     public function regNewUrl(Request $request)
     {
         $new_url = new Mail();
@@ -141,6 +38,7 @@ class TestController extends Controller
         return redirect("/mypage");
     }
 
+編集画面の表示
     public function edit($id)
     {
         $target_url = Mail::where('id', $id)->get();
@@ -154,11 +52,12 @@ class TestController extends Controller
         return view("editURL", compact('target_url'));
     }
 
+編集内容の確認を表示する
     public function updateUrl(Request $request, $id)
     {
-        $to = $request->ToFinResult;
-        $Cc = $request->CcFinResult;
-        $Bcc = $request->BccFinResult;
+        $to = Testcontroller::ConnectFields('to');
+        $Cc = Testcontroller::ConnectFields('Cc');
+        $Bcc = Testcontroller::ConnectFields('Bcc');
         $subject = $request->subject;
         $letterBody = $request->letterBody;
 
@@ -177,9 +76,9 @@ class TestController extends Controller
         $target_url = Mail::where('id', $id)->get();
         $name = $target_url[0]->name;
         return view("confirmUrl", compact('to', 'Cc', 'Bcc', 'subject', 'letterBody', 'url', 'name', 'id'));
-
     }
 
+編集内容を保存
     public function save(Request $request, $id)
     {
         $data = Mail::find($id);
@@ -193,22 +92,5 @@ class TestController extends Controller
         $data->save();
 
         return redirect("/mypage");
-
     }
 
-    public function delete($id)
-    {
-        $delete_url = Mail::find($id);
-        $delete_url->delete();
-        return redirect("/mypage");
-    }
-
-    public function inputVal($con, $title)
-    {
-        if($con){
-            $con = "<li class='list-group-item'>".$title . $con."</li>";
-        }
-        return $con;
-    }
-
-}
