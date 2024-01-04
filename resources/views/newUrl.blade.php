@@ -44,7 +44,7 @@
     <div class="container">
         <div class="card mx-auto w-75 my-3">
             <div class="card-body">
-                <h5 class="card-title">新規メール登録</h5>
+                <h4 class="card-title">新規メール登録</h4>
                 <div class="border rounded my-3">
                     <?php
                     if ($to == null) {
@@ -92,7 +92,7 @@
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
                     <input type="text" name="url_name" value="下書きタイトルを入力" class="form-control">
                     <div class="centered-buttons">
-                        <a href="/main" class="btn btn-outline-danger">TOPに戻る</a>
+                        <a href="/main" class="btn btn-outline-danger back">TOP</a>
                         <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
                         <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
                         <button type="submit" class="btn btn-primary">保存</button>
@@ -101,8 +101,8 @@
                 </form>
             </div>
         </div>
-        <script></script>
     </div>
+    <script src='{{ asset("/js/confirm.js") }}'></script>
 </body>
 
 </html>

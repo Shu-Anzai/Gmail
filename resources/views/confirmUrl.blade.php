@@ -43,8 +43,8 @@
     <div class="container">
         <div class="card mx-auto w-75 my-3">
             <div class="card-body">
+                <h4 class="card-title">メール編集</h4>
                 <h5 class="card-title">{{$name}}</h5>
-                <h6 class="card-title">テンプレート内容</h6>
                 <div class="border rounded my-3">
                     <?php
                     if ($to == null) {
@@ -81,10 +81,11 @@
                     ?>
                 </div>
                 <div class="border rounded my-3">
+                    {{-- 何故かこのpタグの下にだけ余計な余白が生まれてしまう --}}
                     <p class="card-text p-2">URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
-                <form action="/save/{{$id}}" method="post" class="form-group my-2">
+                <form action="/save/{{$id}}" method="post" class="form-group my-3">
                     <input type="hidden" name="to" value="{{$to}}" class="form-control">
                     <input type="hidden" name="Cc" value="{{$Cc}}" class="form-control">
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
@@ -92,7 +93,8 @@
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
                     <input type="text" name="url_name" value="{{$name}}" class="form-control">
                     <div class="centered-buttons">
-                        <a href="/main" class="btn btn-outline-danger">TOPに戻る</a>
+                        <a href="/main" class="btn btn-outline-danger">TOP</a>
+                        <a href="/edit/{{$id}}" class="btn btn-outline-danger back">EDIT</a>
                         <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
                         <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
                         <button type="submit" class="btn btn-primary">保存</button>
@@ -102,5 +104,6 @@
             </div>
         </div>
     </div>
+    <script src='{{ asset("/js/confirm.js") }}'></script>
 </body>
 </html>

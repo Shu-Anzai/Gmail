@@ -154,6 +154,21 @@ Bccs.forEach(Bcc => {
   Bcc.addEventListener("input", ConnectBcc, false);
 });
 
+// 編集画面からmypageへのボタンを押した際のアラート機能
+document.addEventListener('DOMContentLoaded', function () {
+    var mypageButton = document.querySelector('a.btn-outline-danger');
+
+    if (mypageButton) {
+        mypageButton.addEventListener('click', function (event) {
+            var isConfirmed = confirm('変更内容が破棄されます。よろしいですか？');
+
+            if (!isConfirmed) {
+                event.preventDefault(); // ページの移動をキャンセル
+            }
+        });
+    }
+});
+
 
 // document.addEventListener('DOMContentLoaded', function () {
 //     var copyUrlButton = document.getElementById('copyUrl');

@@ -106,8 +106,9 @@
 
                     {{-- URLボタン --}}
                     <div class="row m-3 d-flex align-items-center justify-content-center">
-                        <div class="col-2">
-                            <input type="submit" value="URLを作成" class="form-control">
+                        <div class="centered-buttons">
+                            <a href="/mypage" class="btn btn-outline-danger mr-2">MYPAGE</a>
+                            <button type="submit" class="btn btn-outline-secondary mr-2">URLを作成</button>
                         </div>
                     </div>
                     @csrf
