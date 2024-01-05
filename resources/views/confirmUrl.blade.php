@@ -16,6 +16,14 @@
         .centered-buttons .btn {
             margin: 0 10px;
         }
+
+        #url {
+            margin-bottom: 0;
+        }
+
+        #title:hover{
+            box-shadow:blue 2px;
+        }
     </style>
 
 </head>
@@ -82,7 +90,7 @@
                 </div>
                 <div class="border rounded my-3">
                     {{-- 何故かこのpタグの下にだけ余計な余白が生まれてしまう --}}
-                    <p class="card-text p-2">URL:{{$url}}</p>
+                    <p class="card-text p-2" id="url">URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
                 <form action="/save/{{$id}}" method="post" class="form-group my-3">
@@ -91,7 +99,7 @@
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" value="{{$name}}" class="form-control">
+                    <input type="text" name="url_name" value="{{$name}}" class="form-control" tabindex="0" id="title">
                     <div class="centered-buttons">
                         <a href="/main" class="btn btn-outline-danger">TOP</a>
                         <a href="/edit/{{$id}}" class="btn btn-outline-danger back">EDIT</a>

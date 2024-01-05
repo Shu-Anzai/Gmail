@@ -36,7 +36,7 @@
             @endphp
 
             {{-- フォーム追加ボタン --}}
-            <form method="post" class="form-group">
+            <form method="post" class="form-group needs-validation">
                 <div class="row m-3 btn-group" role="group" aria-label="Basic example">
                     <button type="button" name="tobtn" class="btn btn-outline-primary">Add To</button>
                     <button type="button" name="ccbtn" class="btn btn-outline-primary">Add Cc</button>
@@ -95,7 +95,13 @@
                 {{-- 本文の入力欄 --}}
                 <div class="row m-3">
                     <div class="col">
-                        <textarea name="letterBody" class="form-control" rows="5" placeholder="本文"></textarea>
+                        <textarea name="letterBody" class="form-control" rows="5" placeholder="本文" required></textarea>
+                        @php
+                            if (isset($url)) {
+                                echo "<div class='invalid-feedback'>必ず1つは埋めてください。</div>";
+                            }
+                        @endphp
+
                     </div>
                 </div>
 

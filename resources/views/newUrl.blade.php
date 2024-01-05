@@ -17,6 +17,10 @@
         .centered-buttons .btn {
             margin: 0 10px;
         }
+
+        input[name="url_name"] {
+        font-weight: bold;
+        }
     </style>
 </head>
 
