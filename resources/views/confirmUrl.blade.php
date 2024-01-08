@@ -17,12 +17,16 @@
             margin: 0 10px;
         }
 
-        #url {
+        input[name="url_name"] {
+        font-weight: bold;
+        }
+
+        p {
             margin-bottom: 0;
         }
 
-        #title:hover{
-            box-shadow:blue 2px;
+        #title:hover {
+            box-shadow: 0 0 5px rgba(0, 100, 255, 0.5); /* 例: 青い影、5pxのぼかし */
         }
     </style>
 
@@ -52,7 +56,6 @@
         <div class="card mx-auto w-75 my-3">
             <div class="card-body">
                 <h4 class="card-title">メール編集</h4>
-                <h5 class="card-title">{{$name}}</h5>
                 <div class="border rounded my-3">
                     <?php
                     if ($to == null) {

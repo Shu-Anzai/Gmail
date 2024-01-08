@@ -34,9 +34,8 @@
                     echo "<h1>必ず1つは埋めてください。</h1>";
                 }
             @endphp
-
             {{-- フォーム追加ボタン --}}
-            <form method="post" class="form-group needs-validation">
+            <form method="post" class="form-group needs-toccbcc-validation" novalidate>
                 <div class="row m-3 btn-group" role="group" aria-label="Basic example">
                     <button type="button" name="tobtn" class="btn btn-outline-primary">Add To</button>
                     <button type="button" name="ccbtn" class="btn btn-outline-primary">Add Cc</button>
@@ -46,7 +45,7 @@
                 {{-- Toの入力欄 --}}
                 <div class="row m-3" id="torow">
                     <div class="col-sm" name="inputdiv">
-                        <input type="email" name="To" class="form-control" placeholder="To">
+                        <input type="email" id="To" name="To" class="form-control" placeholder="To" required>
                     </div>
                 </div>
 
@@ -60,7 +59,7 @@
                 {{-- Ccの入力欄 --}}
                 <div class="row m-3" id="ccrow">
                     <div class="col-sm">
-                        <input type="email" name="Cc" class="form-control" placeholder="Cc">
+                        <input type="email" id="Cc" name="Cc" class="form-control" placeholder="Cc" required>
                     </div>
                 </div>
 
@@ -74,7 +73,7 @@
                 {{-- Bccの入力欄 --}}
                 <div class="row m-3" id="bccrow">
                     <div class="col-sm">
-                        <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
+                        <input type="email" id="Bcc" name="Bcc" class="form-control" placeholder="Bcc" required>
                     </div>
                 </div>
 
@@ -88,7 +87,7 @@
                 {{-- 件名の入力欄 --}}
                 <div class="row m-3">
                     <div class="col">
-                        <input type="text" name="subject" class="form-control" placeholder="件名">
+                        <input type="text" name="subject" class="form-control" placeholder="件名" required>
                     </div>
                 </div>
 
@@ -97,9 +96,9 @@
                     <div class="col">
                         <textarea name="letterBody" class="form-control" rows="5" placeholder="本文" required></textarea>
                         @php
-                            if (isset($url)) {
+                            // if (isset($url)) {
                                 echo "<div class='invalid-feedback'>必ず1つは埋めてください。</div>";
-                            }
+                            // }
                         @endphp
 
                     </div>

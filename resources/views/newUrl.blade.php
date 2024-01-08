@@ -21,6 +21,14 @@
         input[name="url_name"] {
         font-weight: bold;
         }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        #title:hover {
+            box-shadow: 0 0 5px rgba(0, 100, 255, 0.5); /* 例: 青い影、5pxのぼかし */
+        }
     </style>
 </head>
 
@@ -85,7 +93,7 @@
                     ?>
                 </div>
                 <div class="border rounded my-3">
-                    <p class="card-text p-2">URL:{{$url}}</p>
+                    <p class="card-text p-2" id='URL'>URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
                 <form action="/reg" method="post" class="form-group my-2">
@@ -94,10 +102,9 @@
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" value="下書きタイトルを入力" class="form-control">
+                    <input type="text" name="url_name" value="下書きタイトルを入力" class="form-control" id="title">
                     <div class="centered-buttons">
-                        <a href="/main" class="btn btn-outline-danger back">TOP</a>
-                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
+                        <a href="javascript:void(0);" onclick="history.back();" class="btn btn-outline-danger back">TOP</a>                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
                         <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
                         <button type="submit" class="btn btn-primary">保存</button>
                     </div>
@@ -106,7 +113,7 @@
             </div>
         </div>
     </div>
-    <script src='{{ asset("/js/confirm.js") }}'></script>
+    <script src='{{ asset("/js/main.js") }}'></script>
 </body>
 
 </html>

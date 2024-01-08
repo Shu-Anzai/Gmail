@@ -1,20 +1,26 @@
 let Tos = document.querySelectorAll("input[name=To]");
+const fto = document.getElementById('To');
 let ResultTo = document.querySelector("div[name=ResultTo]");
 let torow = document.getElementById('torow');
 let tobtn = document.querySelector("button[name=tobtn]");
 let ToFinResult = document.querySelector("input[name=ToFinResult]");
 
 let Ccs = document.querySelectorAll("input[name=Cc]");
+const fcc = document.getElementById('Cc');
 let ResultCc = document.querySelector("div[name=ResultCc]");
 let ccrow = document.getElementById('ccrow');
 let ccbtn = document.querySelector("button[name=ccbtn]");
 let CcFinResult = document.querySelector("input[name=CcFinResult]");
 
 let Bccs = document.querySelectorAll("input[name=Bcc]");
+const fbcc = document.getElementById('Bcc');
 let ResultBcc = document.querySelector("div[name=ResultBcc]");
 let bccrow = document.getElementById('bccrow');
 let bccbtn = document.querySelector("button[name=bccbtn]");
 let BccFinResult = document.querySelector("input[name=BccFinResult]");
+
+let subject = document.querySelector("input[name=subject]");
+let letterBody = document.querySelector("textarea[name=letterBody]");
 
 function ConnectTo() {
   let result = '';
@@ -154,9 +160,14 @@ Bccs.forEach(Bcc => {
   Bcc.addEventListener("input", ConnectBcc, false);
 });
 
+// 戻る画面ロード時にも実行
+window.addEventListener('popstate', ConnectTo);
+window.addEventListener('popstate', ConnectCc);
+window.addEventListener('popstate', ConnectBcc);
+
 // 編集画面からmypageへのボタンを押した際のアラート機能
 document.addEventListener('DOMContentLoaded', function () {
-    var mypageButton = document.querySelector('a.btn-outline-danger');
+    var mypageButton = document.querySelector(' .TM');
 
     if (mypageButton) {
         mypageButton.addEventListener('click', function (event) {
@@ -168,6 +179,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// backクラスのボタンは戻るボタンと同じ挙動にする
+document.addEventListener('DOMContentLoaded', function () {
+    var backButton = document.querySelectorAll('.back');
+
+    backButton.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            window.history.back();
+        });
+    });
+});
+
 
 
 // document.addEventListener('DOMContentLoaded', function () {
@@ -189,14 +213,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 //　入力ページのバリデーション機能
-const forms = document.querySelectorAll('.needs-validation')
+const forms = document.querySelectorAll('.needs-toccbcc-validation')
 Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
+        // ConnectTo, ConnectCc, ConnectBcc を実行
+        ConnectTo();
+        ConnectCc();
+        ConnectBcc();
 
-      form.classList.add('was-validated')
-    }, false)
+        if (ToFinResult.value == "") {
+            fto.value = "to@to"
+        }
+        if (CcFinResult.value == "") {
+            fcc.value = "cc@cc"
+        }
+        if (BccFinResult.value == "") {
+            fbcc.value = "bcc@bcc"
+        }
+
+        // バリデーション
+        if ( (ToFinResult.value == "to@to" && CcFinResult.value == "cc@cc" && BccFinResult.value == "bcc@bcc" && subject.value == "" && letterBody.value == "") || (!form.checkValidity()) ) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    }, false);
 })
+

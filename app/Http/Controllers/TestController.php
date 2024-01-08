@@ -84,8 +84,17 @@ class TestController extends Controller
     public function newUrl(Request $request)
     {
         $to = $request->ToFinResult;
+        if ($to == "to@to" ) {
+            $to = null;
+        }
         $Cc = $request->CcFinResult;
+        if ($Cc == "cc@cc" ) {
+            $Cc = null;
+        }
         $Bcc = $request->BccFinResult;
+        if ($Bcc == "bcc@bcc" ) {
+            $Bcc = null;
+        }
         $subject = $request->subject;
         $letterBody = $request->letterBody;
 
