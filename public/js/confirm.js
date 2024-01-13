@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // 編集画面からmypageへのボタンを押した際のアラート機能
 document.addEventListener('DOMContentLoaded', function () {
-    var mypageButton = document.querySelector('a.btn-outline-danger');
+    var mypageButton = this.getElementById('mypageButton');
 
     if (mypageButton) {
         mypageButton.addEventListener('click', function (event) {
@@ -23,3 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+//　入力ページのバリデーション機能
+const forms = document.querySelectorAll('.needs-toccbcc-validation')
+Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+        const title = document.getElementById('title');
+        const feedback = document.getElementById('feedback');
+
+        // バリデーション
+        if ( !form.checkValidity() || title.value == "" ) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log(feedback.textContent);
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+})
