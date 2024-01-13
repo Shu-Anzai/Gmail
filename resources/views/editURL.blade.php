@@ -34,7 +34,7 @@
                         echo "<h1>必ず1つは埋めてください。</h1>";
                     }
                 @endphp
-                <form action="/edit/{{$target_url[0]->id}}" method="post" class="form-group">
+                <form action="/edit/{{$target_url[0]->id}}" method="post" class="form-group needs-toccbcc-validation" novalidate>
                     {{-- フォーム追加ボタン --}}
                     <div class="row m-3 btn-group" role="group" aria-label="Basic example">
                         <button type="button" name="tobtn" class="btn btn-outline-primary">Add To</button>
@@ -47,7 +47,7 @@
                         @foreach ($target_url[0]->to as $key => $to)
                             @if ($to !== null)
                                 <div class="col-sm" name="inputdiv">
-                                    <input type="email" name="To" value="{{ $to }}" class="form-control" placeholder="To">
+                                    <input type="email" id="To" name="To" value="{{ $to }}" class="form-control" placeholder="To" required>
                                 </div>
                             @endif
                         @endforeach
@@ -63,7 +63,7 @@
                         @foreach ($target_url[0]->Cc as $key => $Cc)
                             @if ($Cc !== null)
                                 <div class="col-sm">
-                                    <input type="email" name="Cc" value="{{ $Cc }}" class="form-control" placeholder="Cc">
+                                    <input type="email" id="Cc" name="Cc" value="{{ $Cc }}" class="form-control" placeholder="Cc" required>
                                 </div>
                             @endif
                         @endforeach
@@ -79,7 +79,7 @@
                         @foreach ($target_url[0]->Bcc as $key => $Bcc)
                             @if ($Bcc !== null)
                                 <div class="col-sm">
-                                    <input type="email" name="Bcc" value="{{ $Bcc }}" class="form-control" placeholder="Bcc">
+                                    <input type="email" id="Bcc" name="Bcc" value="{{ $Bcc }}" class="form-control" placeholder="Bcc" required>
                                 </div>
                             @endif
                         @endforeach
@@ -93,14 +93,17 @@
                     {{-- 件名の入力欄 --}}
                     <div class="row m-3">
                         <div class="col">
-                            <input type="text" name="subject" value="{{$target_url[0]->subject}}" class="form-control" placeholder="件名">
+                            <input type="text" name="subject" value="{{$target_url[0]->subject}}" class="form-control" placeholder="件名" required>
                         </div>
                     </div>
 
                     {{-- 本文の入力欄 --}}
                     <div class="row m-3">
                         <div class="col">
-                            <textarea name="letterBody" class="form-control" rows="5" placeholder="本文">{{$target_url[0]->letter_body}}</textarea>
+                            <textarea name="letterBody" class="form-control" rows="5" placeholder="本文" required>{{$target_url[0]->letter_body}}</textarea>
+                            @php
+                                echo "<div class='invalid-feedback' id='feedback'></div>";
+                            @endphp
                         </div>
                     </div>
 

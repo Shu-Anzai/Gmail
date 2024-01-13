@@ -230,13 +230,59 @@ Array.from(forms).forEach(form => {
         if (BccFinResult.value == "") {
             fbcc.value = "bcc@bcc"
         }
+        if (subject.value == "") {
+            subject.value = "shubject"
+        }
+        if (letterBody.value == "") {
+            letterBody.value = "2000/10/22"
+        }
+
+        ConnectTo();
+        ConnectCc();
+        ConnectBcc();
+
+        const feedback = document.getElementById('feedback');
 
         // バリデーション
-        if ( (ToFinResult.value == "to@to" && CcFinResult.value == "cc@cc" && BccFinResult.value == "bcc@bcc" && subject.value == "" && letterBody.value == "") || (!form.checkValidity()) ) {
+        if ( ToFinResult.value == "to@to" && CcFinResult.value == "cc@cc" && BccFinResult.value == "bcc@bcc" && subject.value == "shubject" && letterBody.value == "2000/10/22" ) {
             event.preventDefault();
             event.stopPropagation();
+            ConnectTo();
+            ConnectCc();
+            ConnectBcc();
+            feedback.textContent = "必ず1つは埋めてください。";
+        } else if(!form.checkValidity() ) {
+            event.preventDefault();
+            event.stopPropagation();
+            ConnectTo();
+            ConnectCc();
+            ConnectBcc();
+            feedback.textContent = "メールアドレスや文章の形式を修正してください。";
         }
+        console.log(feedback.textContent);
+
+        if (ToFinResult.value == "to@to") {
+            fto.value = ""
+        }
+        if (CcFinResult.value == "cc@cc") {
+            fcc.value = ""
+        }
+        if (BccFinResult.value == "bcc@bcc") {
+            fbcc.value = ""
+        }
+        if (subject.value == "shubject") {
+            subject.value = ""
+        }
+        if (letterBody.value == "2000/10/22") {
+            letterBody.value = ""
+        }
+        ConnectTo();
+        ConnectCc();
+        ConnectBcc();
+
         form.classList.add('was-validated');
+
+
     }, false);
 })
 

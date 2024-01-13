@@ -77,7 +77,7 @@
                 <div class="border rounded my-3">
                     <?php
                     if ($subject == null) {
-                        echo "<p class='card-text p-2'>件名:件名なし</p>";
+                        echo "<p class='card-text p-2'>件名なし</p>";
                     } else {
                         echo "<p class='card-text p-2'>件名:$subject</p>";
                     }

@@ -96,9 +96,7 @@
                     <div class="col">
                         <textarea name="letterBody" class="form-control" rows="5" placeholder="本文" required></textarea>
                         @php
-                            // if (isset($url)) {
-                                echo "<div class='invalid-feedback'>必ず1つは埋めてください。</div>";
-                            // }
+                            echo "<div class='invalid-feedback' id='feedback'></div>";
                         @endphp
 
                     </div>
