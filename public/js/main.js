@@ -231,7 +231,7 @@ Array.from(forms).forEach(form => {
             fbcc.value = "bcc@bcc"
         }
         if (subject.value == "") {
-            subject.value = "shubject"
+                    subject.value = "shubject"
         }
         if (letterBody.value == "") {
             letterBody.value = "2000/10/22"
@@ -241,9 +241,13 @@ Array.from(forms).forEach(form => {
         ConnectCc();
         ConnectBcc();
 
+
+        const Tofeedback = document.getElementById('Tofeedback');
+        const Ccfeedback = document.getElementById('Ccfeedback');
+        const Bccfeedback = document.getElementById('Bccfeedback');
         const feedback = document.getElementById('feedback');
 
-        // バリデーション
+        // バリデーション(全欄空欄)
         if ( ToFinResult.value == "to@to" && CcFinResult.value == "cc@cc" && BccFinResult.value == "bcc@bcc" && subject.value == "shubject" && letterBody.value == "2000/10/22" ) {
             event.preventDefault();
             event.stopPropagation();
@@ -251,6 +255,7 @@ Array.from(forms).forEach(form => {
             ConnectCc();
             ConnectBcc();
             feedback.textContent = "必ず1つは埋めてください。";
+        // バリデーション（形式が不可）
         } else if(!form.checkValidity() ) {
             event.preventDefault();
             event.stopPropagation();
@@ -258,7 +263,12 @@ Array.from(forms).forEach(form => {
             ConnectCc();
             ConnectBcc();
             feedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            Tofeedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            Ccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            Bccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
         }
+
+
         console.log(feedback.textContent);
 
         if (ToFinResult.value == "to@to") {

@@ -46,6 +46,7 @@
                 <div class="row m-3" id="torow">
                     <div class="col-sm" name="inputdiv">
                         <input type="email" id="To" name="To" class="form-control" placeholder="To" required>
+                        <div class='invalid-feedback' id='Tofeedback'></div>
                     </div>
                 </div>
 
@@ -56,10 +57,13 @@
 
                 <input type="hidden" name="ToFinResult">
 
+
+
                 {{-- Ccの入力欄 --}}
                 <div class="row m-3" id="ccrow">
                     <div class="col-sm">
                         <input type="email" id="Cc" name="Cc" class="form-control" placeholder="Cc" required>
+                            <div class='invalid-feedback' id='Ccfeedback'></div>
                     </div>
                 </div>
 
@@ -70,10 +74,13 @@
 
                 <input type="hidden" name="CcFinResult">
 
+
+
                 {{-- Bccの入力欄 --}}
                 <div class="row m-3" id="bccrow">
                     <div class="col-sm">
                         <input type="email" id="Bcc" name="Bcc" class="form-control" placeholder="Bcc" required>
+                            <div class='invalid-feedback' id='Bccfeedback'></div>
                     </div>
                 </div>
 
