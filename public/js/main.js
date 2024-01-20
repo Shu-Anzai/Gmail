@@ -251,22 +251,20 @@ Array.from(forms).forEach(form => {
         if ( ToFinResult.value == "to@to" && CcFinResult.value == "cc@cc" && BccFinResult.value == "bcc@bcc" && subject.value == "shubject" && letterBody.value == "2000/10/22" ) {
             event.preventDefault();
             event.stopPropagation();
-            ConnectTo();
-            ConnectCc();
-            ConnectBcc();
             feedback.textContent = "必ず1つは埋めてください。";
         // バリデーション（形式が不可）
         } else if(!form.checkValidity() ) {
             event.preventDefault();
             event.stopPropagation();
-            ConnectTo();
-            ConnectCc();
-            ConnectBcc();
             feedback.textContent = "メールアドレスや文章の形式を修正してください。";
             Tofeedback.textContent = "メールアドレスや文章の形式を修正してください。";
             Ccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
             Bccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
         }
+
+        ConnectTo();
+        ConnectCc();
+        ConnectBcc();
 
 
         console.log(feedback.textContent);
