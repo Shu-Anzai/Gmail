@@ -29,11 +29,6 @@
     </header>
     <div class="container text-center">
         <div class="gy-2">
-            @php
-                if (isset($url)) {
-                    echo "<h1>必ず1つは埋めてください。</h1>";
-                }
-            @endphp
             {{-- フォーム追加ボタン --}}
             <form method="post" class="form-group needs-toccbcc-validation" novalidate>
                 <div class="row m-3 btn-group" role="group" aria-label="Basic example">
@@ -61,9 +56,9 @@
 
                 {{-- Ccの入力欄 --}}
                 <div class="row m-3" id="ccrow">
-                    <div class="col-sm">
+                    <div class="col-sm" name="inputdiv">
                         <input type="email" id="Cc" name="Cc" class="form-control" placeholder="Cc" required>
-                            <div class='invalid-feedback' id='Ccfeedback'></div>
+                        <div class='invalid-feedback' id='Ccfeedback'></div>
                     </div>
                 </div>
 
@@ -78,9 +73,9 @@
 
                 {{-- Bccの入力欄 --}}
                 <div class="row m-3" id="bccrow">
-                    <div class="col-sm">
+                    <div class="col-sm" name="inputdiv">
                         <input type="email" id="Bcc" name="Bcc" class="form-control" placeholder="Bcc" required>
-                            <div class='invalid-feedback' id='Bccfeedback'></div>
+                        <div class='invalid-feedback' id='Bccfeedback'></div>
                     </div>
                 </div>
 
