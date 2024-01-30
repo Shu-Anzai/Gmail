@@ -23,20 +23,20 @@ let subject = document.querySelector("input[name=subject]");
 let letterBody = document.querySelector("textarea[name=letterBody]");
 
 function ConnectTo() {
-  let result = '';
+  let result = "";
 
   // Tosを通常の配列に変換
   const ToArray = Array.from(Tos);
 
   ToArray.forEach(To => {
-    if (result === '') {
+    if (result === "") {
       result = To.value;
-    } else if (To.value !== '') {
-      result += ',' + To.value;
+    } else if (To.value !== "") {
+      result += "," + To.value;
     }
   });
 
-  if (result === '') {
+  if (result === "") {
     ResultTo.textContent = result;
   } else {
     ResultTo.textContent = "To: " + result;
@@ -51,9 +51,10 @@ tobtn.addEventListener('click', () => {
     newForm.name = 'To';
     newForm.classList.add('form-control');
     newForm.placeholder = 'To';
+    newForm.required = true;
 
     const inputDiv = document.createElement('div');
-    inputDiv.name = 'inputdiv';
+    inputDiv.setAttribute("name", "inputdiv");
     inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
 
@@ -65,20 +66,20 @@ tobtn.addEventListener('click', () => {
 });
 
 function ConnectCc() {
-  let result = '';
+  let result = "";
 
   // Ccsを通常の配列に変換
   const CcArray = Array.from(Ccs);
 
   CcArray.forEach(Cc => {
-    if (result === '') {
+    if (result === "") {
       result = Cc.value;
-    } else if (Cc.value !== '') {
-      result += ',' + Cc.value;
+    } else if (Cc.value !== "") {
+      result += "," + Cc.value;
     }
   });
 
-  if (result === '') {
+  if (result === "") {
     ResultCc.textContent = result;
   } else {
     ResultCc.textContent = "Cc: " + result;
@@ -93,10 +94,11 @@ ccbtn.addEventListener('click', () => {
     newForm.name = 'Cc';
     newForm.classList.add('form-control');
     newForm.placeholder = 'Cc';
+    newForm.required = true;
 
     const inputDiv = document.createElement('div');
-    inputDiv.name = 'inputdiv';
     inputDiv.classList.add('col-sm');
+    inputDiv.setAttribute("name", "inputdiv");
     inputDiv.appendChild(newForm);
 
     ccrow.appendChild(inputDiv);
@@ -107,20 +109,20 @@ ccbtn.addEventListener('click', () => {
 });
 
 function ConnectBcc() {
-  let result = '';
+  let result = "";
 
   // Bccsを通常の配列に変換
   const BccArray = Array.from(Bccs);
 
   BccArray.forEach(Bcc => {
-    if (result === '') {
+    if (result === "") {
       result = Bcc.value;
-    } else if (Bcc.value !== '') {
-      result += ',' + Bcc.value;
+    } else if (Bcc.value !== "") {
+      result += "," + Bcc.value;
     }
   });
 
-  if (result === '') {
+  if (result === "") {
     ResultBcc.textContent = result;
   } else {
     ResultBcc.textContent = "Bcc: " + result;
@@ -134,10 +136,12 @@ bccbtn.addEventListener('click', () => {
     newForm.type = 'email';
     newForm.name = 'Bcc';
     newForm.classList.add('form-control');
+    // newForm.classList.add('is-valid');
     newForm.placeholder = 'Bcc';
+    newForm.required = true;
 
     const inputDiv = document.createElement('div');
-    inputDiv.name = 'inputdiv';
+    inputDiv.setAttribute("name", "inputdiv");
     inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
 
@@ -217,26 +221,69 @@ const forms = document.querySelectorAll('.needs-toccbcc-validation')
 Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
         // ConnectTo, ConnectCc, ConnectBcc を実行
+
+        const Tofeedback = document.getElementById('Tofeedback');
+        const Ccfeedback = document.getElementById('Ccfeedback');
+        const Bccfeedback = document.getElementById('Bccfeedback');
+        const feedback = document.getElementById('feedback');
+
+        // console.log(ToFinResult);
+        // console.log(CcFinResult);
+        // console.log(BccFinResult);
+
+            if (ToFinResult.value === "") {
+                for (; torow.firstElementChild !== null ;) {
+                    torow.removeChild(torow.firstElementChild);
+                }
+            }
+            if (CcFinResult.value === "") {
+                console.log(ccrow);
+                for (; ccrow.firstElementChild !== null ;) {
+                    ccrow.removeChild(ccrow.firstElementChild);
+                }
+                console.log(ccrow);
+            }
+            if (BccFinResult.value === "") {
+                for (; bccrow.firstElementChild !== null ;) {
+                    bccrow.removeChild(bccrow.firstElementChild);
+                }
+            }
+        // バリデーション(全欄空欄)
+        if ( ToFinResult.value == "" && CcFinResult.value == "" && BccFinResult.value == "" && subject.value == "" && letterBody.value == "" ) {
+            event.preventDefault();
+            event.stopPropagation();
+            feedback.textContent = "件名と本文は埋めてください。";
+            // バリデーション（形式が不可）
+        } else if ( subject.value == "" || letterBody == "") {
+            feedback.textContent = "件名と本文は埋めてください。";
+        } else if(!form.checkValidity() ) {
+            event.preventDefault();
+            event.stopPropagation();
+            feedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            if (Tofeedback) {
+                Tofeedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            }
+            if (Ccfeedback) {
+                Ccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            }
+            if (Bccfeedback) {
+                Bccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
+            }
+            // console.log(torow)
+            // console.log(ccrow)
+            // console.log(bccrow)
+
+        }
+
+
+        console.log(feedback.textContent);
         ConnectTo();
         ConnectCc();
         ConnectBcc();
 
-        if (ToFinResult.value == "") {
-            fto.value = "to@to"
-        }
-        if (CcFinResult.value == "") {
-            fcc.value = "cc@cc"
-        }
-        if (BccFinResult.value == "") {
-            fbcc.value = "bcc@bcc"
-        }
-
-        // バリデーション
-        if ( (ToFinResult.value == "to@to" && CcFinResult.value == "cc@cc" && BccFinResult.value == "bcc@bcc" && subject.value == "" && letterBody.value == "") || (!form.checkValidity()) ) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
         form.classList.add('was-validated');
+
+
     }, false);
 })
 

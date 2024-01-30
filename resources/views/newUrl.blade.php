@@ -43,7 +43,7 @@
                 <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="mypage">mypage</a>
+                        <a class="nav-link" id="mypageButton" href="mypage">mypage</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
@@ -77,7 +77,7 @@
                 <div class="border rounded my-3">
                     <?php
                     if ($subject == null) {
-                        echo "<p class='card-text p-2'>件名:件名なし</p>";
+                        echo "<p class='card-text p-2'>件名なし</p>";
                     } else {
                         echo "<p class='card-text p-2'>件名:$subject</p>";
                     }
@@ -96,15 +96,18 @@
                     <p class="card-text p-2" id='URL'>URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
-                <form action="/reg" method="post" class="form-group my-2">
+                <form action="/reg" method="post" class="form-group my-2 needs-toccbcc-validation" novalidate>
                     <input type="hidden" name="to" value="{{$to}}" class="form-control">
                     <input type="hidden" name="Cc" value="{{$Cc}}" class="form-control">
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" value="下書きタイトルを入力" class="form-control" id="title">
+                    <input type="text" name="url_name" placeholder="下書きタイトルを入力" class="form-control" id="title" required>
+                    @php
+                        echo "<div class='invalid-feedback text-center' id='feedback'>入力してください</div>";
+                    @endphp
                     <div class="centered-buttons">
-                        <a href="javascript:void(0);" onclick="history.back();" class="btn btn-outline-danger back">TOP</a>                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
+                        <a href="" class="btn btn-outline-danger back">TOP</a>                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
                         <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
                         <button type="submit" class="btn btn-primary">保存</button>
                     </div>
@@ -113,7 +116,7 @@
             </div>
         </div>
     </div>
-    <script src='{{ asset("/js/main.js") }}'></script>
+    <script src='{{ asset("/js/confirm.js") }}'></script>
 </body>
 
 </html>

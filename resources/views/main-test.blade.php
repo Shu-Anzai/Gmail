@@ -28,11 +28,6 @@
     </header>
     <div class="container text-center">
         <div class="gy-2">
-            @php
-                if (isset($url)) {
-                    echo "<h1>必ず1つは埋めてください。</h1>";
-                }
-            @endphp
 
             {{-- フォーム追加ボタン --}}
             <form method="post" class="form-group">

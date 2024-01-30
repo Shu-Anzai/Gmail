@@ -42,7 +42,7 @@
                 <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="mypage">mypage</a>
+                        <a class="nav-link" id="mypageButton" href="mypage">mypage</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
@@ -96,13 +96,16 @@
                     <p class="card-text p-2" id="url">URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
-                <form action="/save/{{$id}}" method="post" class="form-group my-3">
+                <form action="/save/{{$id}}" method="post" class="form-group my-2 needs-toccbcc-validation" novalidate>
                     <input type="hidden" name="to" value="{{$to}}" class="form-control">
                     <input type="hidden" name="Cc" value="{{$Cc}}" class="form-control">
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" value="{{$name}}" class="form-control" tabindex="0" id="title">
+                    <input type="text" name="url_name" placeholder="下書きタイトルを入力" value="{{$name}}" class="form-control" tabindex="0" id="title" required>
+                    @php
+                        echo "<div class='invalid-feedback text-center' id='feedback'>入力してください</div>";
+                    @endphp
                     <div class="centered-buttons">
                         <a href="/main" class="btn btn-outline-danger">TOP</a>
                         <a href="/edit/{{$id}}" class="btn btn-outline-danger back">EDIT</a>
