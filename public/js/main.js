@@ -4,6 +4,7 @@ let ResultTo = document.querySelector("div[name=ResultTo]");
 let torow = document.getElementById('torow');
 let tobtn = document.querySelector("button[name=tobtn]");
 let ToFinResult = document.querySelector("input[name=ToFinResult]");
+const Tofeedback = document.getElementById('Tofeedback');
 
 let Ccs = document.querySelectorAll("input[name=Cc]");
 const fcc = document.getElementById('Cc');
@@ -11,6 +12,7 @@ let ResultCc = document.querySelector("div[name=ResultCc]");
 let ccrow = document.getElementById('ccrow');
 let ccbtn = document.querySelector("button[name=ccbtn]");
 let CcFinResult = document.querySelector("input[name=CcFinResult]");
+const Ccfeedback = document.getElementById('Ccfeedback');
 
 let Bccs = document.querySelectorAll("input[name=Bcc]");
 const fbcc = document.getElementById('Bcc');
@@ -18,9 +20,12 @@ let ResultBcc = document.querySelector("div[name=ResultBcc]");
 let bccrow = document.getElementById('bccrow');
 let bccbtn = document.querySelector("button[name=bccbtn]");
 let BccFinResult = document.querySelector("input[name=BccFinResult]");
+const Bccfeedback = document.getElementById('Bccfeedback');
 
 let subject = document.querySelector("input[name=subject]");
+
 let letterBody = document.querySelector("textarea[name=letterBody]");
+const feedback = document.getElementById('feedback');
 
 function ConnectTo() {
   let result = "";
@@ -57,6 +62,11 @@ tobtn.addEventListener('click', () => {
     inputDiv.setAttribute("name", "inputdiv");
     inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
+
+        const newfeedback = document.createElement('div');
+        newfeedback.classList.add('invalid-feedback');
+        newfeedback.textContent = 'メールアドレスの形式で入力してください。（空欄可）';
+        inputDiv.appendChild(newfeedback);
 
     torow.appendChild(inputDiv);
 
@@ -101,6 +111,11 @@ ccbtn.addEventListener('click', () => {
     inputDiv.setAttribute("name", "inputdiv");
     inputDiv.appendChild(newForm);
 
+    const newfeedback = document.createElement('div');
+    newfeedback.classList.add('invalid-feedback');
+    newfeedback.textContent = 'メールアドレスの形式で入力してください。（空欄可）';
+    inputDiv.appendChild(newfeedback);
+
     ccrow.appendChild(inputDiv);
 
     Ccs = document.querySelectorAll("input[name=Cc]");
@@ -144,6 +159,11 @@ bccbtn.addEventListener('click', () => {
     inputDiv.setAttribute("name", "inputdiv");
     inputDiv.classList.add('col-sm');
     inputDiv.appendChild(newForm);
+
+    const newfeedback = document.createElement('div');
+    newfeedback.classList.add('invalid-feedback');
+    newfeedback.textContent = 'メールアドレスの形式で入力してください。（空欄可）';
+    inputDiv.appendChild(newfeedback);
 
     bccrow.appendChild(inputDiv);
 
@@ -220,61 +240,37 @@ document.addEventListener('DOMContentLoaded', function () {
 const forms = document.querySelectorAll('.needs-toccbcc-validation')
 Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
-        // ConnectTo, ConnectCc, ConnectBcc を実行
 
-        const Tofeedback = document.getElementById('Tofeedback');
-        const Ccfeedback = document.getElementById('Ccfeedback');
-        const Bccfeedback = document.getElementById('Bccfeedback');
-        const feedback = document.getElementById('feedback');
+        // 未記入の入力欄の行を削除
+        if (ToFinResult.value === "") {
+            for (; torow.firstElementChild !== null ;) {
+                torow.removeChild(torow.firstElementChild);
+            }
+        }
+        if (CcFinResult.value === "") {
+            console.log(ccrow);
+            for (; ccrow.firstElementChild !== null ;) {
+                ccrow.removeChild(ccrow.firstElementChild);
+            }
+            console.log(ccrow);
+        }
+        if (BccFinResult.value === "") {
+            for (; bccrow.firstElementChild !== null ;) {
+                bccrow.removeChild(bccrow.firstElementChild);
+            }
+        }
 
-        // console.log(ToFinResult);
-        // console.log(CcFinResult);
-        // console.log(BccFinResult);
-
-            if (ToFinResult.value === "") {
-                for (; torow.firstElementChild !== null ;) {
-                    torow.removeChild(torow.firstElementChild);
-                }
-            }
-            if (CcFinResult.value === "") {
-                console.log(ccrow);
-                for (; ccrow.firstElementChild !== null ;) {
-                    ccrow.removeChild(ccrow.firstElementChild);
-                }
-                console.log(ccrow);
-            }
-            if (BccFinResult.value === "") {
-                for (; bccrow.firstElementChild !== null ;) {
-                    bccrow.removeChild(bccrow.firstElementChild);
-                }
-            }
         // バリデーション(全欄空欄)
         if ( ToFinResult.value == "" && CcFinResult.value == "" && BccFinResult.value == "" && subject.value == "" && letterBody.value == "" ) {
             event.preventDefault();
             event.stopPropagation();
-            feedback.textContent = "件名と本文は埋めてください。";
+            feedback.textContent = "どれか1つはは埋めてください。";
             // バリデーション（形式が不可）
-        } else if ( subject.value == "" || letterBody == "") {
-            feedback.textContent = "件名と本文は埋めてください。";
         } else if(!form.checkValidity() ) {
             event.preventDefault();
             event.stopPropagation();
-            feedback.textContent = "メールアドレスや文章の形式を修正してください。";
-            if (Tofeedback) {
-                Tofeedback.textContent = "メールアドレスや文章の形式を修正してください。";
-            }
-            if (Ccfeedback) {
-                Ccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
-            }
-            if (Bccfeedback) {
-                Bccfeedback.textContent = "メールアドレスや文章の形式を修正してください。";
-            }
-            // console.log(torow)
-            // console.log(ccrow)
-            // console.log(bccrow)
-
+            feedback.textContent = "メールアドレスの形式で入力してください。（空欄可）";
         }
-
 
         console.log(feedback.textContent);
         ConnectTo();
@@ -282,7 +278,6 @@ Array.from(forms).forEach(form => {
         ConnectBcc();
 
         form.classList.add('was-validated');
-
 
     }, false);
 })
