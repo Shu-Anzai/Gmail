@@ -108,8 +108,8 @@
                     @endphp
                     <div class="centered-buttons">
                         <a href="/main" class="btn btn-outline-danger">TOP</a>
-                        <a href="/edit/{{$id}}" class="btn btn-outline-danger back">EDIT</a>
-                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
+                        <a href="/edit/{{$id}}" class="btn btn-outline-warning back">EDIT</a>
+                        <button type="button" class="btn btn-outline-success" id="copyUrl">copy</button>
                         <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
                         <button type="submit" class="btn btn-primary">保存</button>
                     </div>
