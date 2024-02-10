@@ -18,7 +18,7 @@ copyのjsがエラーになる
 【やること】
 CSS
     newUrl.blade.php
-        URLのコピーボタン
+        ✓URLのコピーボタン
         ✓mainに戻るボタン
             ✓入力内容を書いておる状態で前に戻る
                 ✓aタグをbottomタグにして、windowbackを使ったうえで無記入だった欄に代入されたto@toたちを削除して再表示する
