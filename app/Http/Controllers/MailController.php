@@ -83,18 +83,9 @@ class TestController extends Controller
 
     public function newUrl(Request $request)
     {
-        $to = $request->ToFinResult;
-        if ($to == "to@to" ) {
-            $to = null;
-        }
-        $Cc = $request->CcFinResult;
-        if ($Cc == "cc@cc" ) {
-            $Cc = null;
-        }
-        $Bcc = $request->BccFinResult;
-        if ($Bcc == "bcc@bcc" ) {
-            $Bcc = null;
-        }
+        $to = Testcontroller::ConnectFields('To');
+        $Cc = Testcontroller::ConnectFields('Cc');
+        $Bcc = Testcontroller::ConnectFields('Bcc');
         $subject = $request->subject;
         $letterBody = $request->letterBody;
 
@@ -165,9 +156,9 @@ class TestController extends Controller
 
     public function updateUrl(Request $request, $id)
     {
-        $to = $request->ToFinResult;
-        $Cc = $request->CcFinResult;
-        $Bcc = $request->BccFinResult;
+        $to = Testcontroller::ConnectFields('to');
+        $Cc = Testcontroller::ConnectFields('Cc');
+        $Bcc = Testcontroller::ConnectFields('Bcc');
         $subject = $request->subject;
         $letterBody = $request->letterBody;
 
@@ -211,13 +202,4 @@ class TestController extends Controller
         $delete_url->delete();
         return redirect("/mypage");
     }
-
-    public function inputVal($con, $title)
-    {
-        if($con){
-            $con = "<li class='list-group-item'>".$title . $con."</li>";
-        }
-        return $con;
-    }
-
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +29,8 @@
             box-shadow: 0 0 5px rgba(0, 100, 255, 0.5); /* 例: 青い影、5pxのぼかし */
         }
     </style>
-</head>
 
+</head>
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -56,7 +55,7 @@
     <div class="container">
         <div class="card mx-auto w-75 my-3">
             <div class="card-body">
-                <h4 class="card-title">新規メール登録</h4>
+                <h4 class="card-title">メール編集</h4>
                 <div class="border rounded my-3">
                     <?php
                     if ($to == null) {
@@ -77,7 +76,7 @@
                 <div class="border rounded my-3">
                     <?php
                     if ($subject == null) {
-                        echo "<p class='card-text p-2'>件名なし</p>";
+                        echo "<p class='card-text p-2'>件名:件名なし</p>";
                     } else {
                         echo "<p class='card-text p-2'>件名:$subject</p>";
                     }
@@ -93,31 +92,32 @@
                     ?>
                 </div>
                 <div class="border rounded my-3">
-                    <p class="card-text p-2" id='URL'>URL:{{$url}}</p>
+                    {{-- 何故かこのpタグの下にだけ余計な余白が生まれてしまう --}}
+                    <p class="card-text p-2" id="url">URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
-                <form action="/reg" method="post" class="form-group my-2 needs-toccbcc-validation" novalidate>
+                <form action="/save/{{$id}}" method="post" class="form-group my-2 needs-toccbcc-validation" novalidate>
                     <input type="hidden" name="to" value="{{$to}}" class="form-control">
                     <input type="hidden" name="Cc" value="{{$Cc}}" class="form-control">
                     <input type="hidden" name="Bcc" value="{{$Bcc}}" class="form-control">
                     <input type="hidden" name="subject" value="{{$subject}}" class="form-control">
                     <input type="hidden" name="letterBody" value="{{$letterBody}}" class="form-control">
-                    <input type="text" name="url_name" placeholder="下書きタイトルを入力" class="form-control" id="title" required>
+                    <input type="text" name="url_name" placeholder="下書きタイトルを入力" value="{{$name}}" class="form-control" tabindex="0" id="title" required>
                     @php
                         echo "<div class='invalid-feedback text-center' id='feedback'>入力してください</div>";
                     @endphp
                     <div class="centered-buttons">
-                        <a href="" class="btn btn-outline-danger back">TOP</a>
-                        <button type="button" class="btn btn-outline-success" id="copyUrl">COPY</button>
-                        <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">OPEN URL</a>
-                        <button type="submit" class="btn btn-primary">SAVE</button>
+                        <a href="/main" class="btn btn-outline-danger">TOP</a>
+                        <a href="/edit/{{$id}}" class="btn btn-outline-warning back">EDIT</a>
+                        <button type="button" class="btn btn-outline-success" id="copyUrl">copy</button>
+                        <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
+                        <button type="submit" class="btn btn-primary">保存</button>
                     </div>
                     @csrf
                 </form>
             </div>
         </div>
     </div>
-    <script src='{{ asset("/js/new-confirm.js") }}'></script>
+    <script src='{{ asset("/js/confirm.js") }}'></script>
 </body>
-
 </html>

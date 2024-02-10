@@ -1,0 +1,254 @@
+【相談内容】
+2023/11/26
+newUrlのbootstrapについて
+    どこまでやればまともなUIと言える？（安心感と好感を覚えるクオリティの境界線）
+    確認画面をわかりやすくするコンセプト
+
+Oauthの認証
+→Laravel socialiteが必要そう
+    →Breezeは消したほうがいい？
+        →Oauthを使わない認証に使用する？
+            →ミドルウェアとして2つ使用することは可能？
+    →composerが必要そうだけどインストールして大丈夫？
+
+copyのjsがエラーになる
+
+バリデーションのテスト方法
+
+【やること】
+CSS
+    newUrl.blade.php
+        ✓URLのコピーボタン
+        ✓mainに戻るボタン
+            ✓入力内容を書いておる状態で前に戻る
+                ✓aタグをbottomタグにして、windowbackを使ったうえで無記入だった欄に代入されたto@toたちを削除して再表示する
+        ✓下書きタイトルを入力を入力欄だと一瞬でわかるように変更
+        ✓必ず1つは埋めてください。の表示方法（アラート？）
+            ✓newURLのタイトル、✓edit、✓confirmURLのタイトルにも適用する。
+            ✓エラーの際にダミーアドレスが入るが、これを入力前は消したい
+            ✓本文が入っている状態でメルアドの形式がバリデーションでfalseになってもfeedbackが代入されない。
+            ✓296行目時点で<input type="hidden" name="ToFinResult" value="">という状態になっているせいか、上手く条件で当てはめられない。
+    ✓mypage.blade.php
+        ✓カード形式にレイアウトを変更
+        ✓ボタンとリンクをnewUrlと書式統一
+            ✓ボタン同士の余白や位置関係(justify-content-betweenを消せば中央寄せはなくなる)
+        ✓To:やBcc:などの項目名も追加
+        ✓deleteボタンを押したときにjsアラートを表示
+    ✓editURL.blade.php
+        ✓バリデーション
+            ✓行のif条件で必ず無入力扱いになってしまう。→FinResult系のHTMLにValueを書いていなかったため、defaultという値を最初は代入させた。なぜか""では上手くいかなかった。
+    ✓confirmUrl.blade.php
+        ✓メールの名前を修正できるプログラムになっているか、チェックする
+        ✓URL欄の変な余白をなくす
+        ✓editに戻るボタン
+        ✓TOPに戻るボタンをMYPAGEに戻るボタンに
+            ✓入力内容が破棄されるアラート
+    ✓編集画面や確認画面のナビゲーションバーを押したときの流れ
+        ✓submitしたことになってしまう。
+            mainに戻ろうとしたところ、/edit/mainになっていた？
+    login周り
+    ロゴ周りを美しく
+    ナビゲーションバーの右の2つのボタンを画面幅にかかわらず横並びのままにする
+    全体のテーマとなる画像や背景を挿入する？
+        カードは無地背景で浮き出る形にする？
+利用上の注意を書く？
+    必ずメールで送信元として用いたいメールアカウントでログインした状態で利用してください
+    他のブラウザを試す
+    欄を追加して、最初の欄を空欄にしていた場合は、メールに反映されない仮メールアドレスが追加されること
+コードのコメント
+
+(Oauthの実装)
+https://qiita.com/u-dai/items/91df3b923dc82fed5b76
+https://tech.bita.jp/article/28
+https://readouble.com/laravel/5.6/ja/socialite.html
+
+デプロイ方法の検討
+・今のdockerから
+・Virtual Boxから
+・PCのOS自体を変更
+・レンタルサーバー
+・AWS
+
+【コンセプト】
+GamilのTo, Cc, Bcc, 件名, 本文を入力
+
+↓
+
+URLで返ってくる
+
+【サブ】
+・ログイン機能
+・ユーザーごとの出力結果保存機能（名前付き）
+・出力結果はURL自体とコピーボタン
+
+【必要な処理】
+・DB操作
+・入力内容からURL化させる置換処理
+・バリデート
+・認証（Google Oauth認証）
+
+【作るページ】
+・ログインページ
+・メインページ（URL化の処理をする）
+	・保存確認ページ（保存内容に名前をつけられる）
+・マイページ（テーブル形式で過去に保存したURLを確認する）
+
+Laravel
+完成したら、ReactNativeでデスクトップアプリケーションに作り直してもいい？？
+
+DB構造
+user table
+id,          name,   ←googleOAuth
+primary
+
+1
+2
+3
+4
+
+URL
+id,                         user_id,           name, to, cc, bcc, subject, letter_body
+Primary, notNull INT        notNULL,INT	       notNULL,STRING
+
+
+ALL NULLなら保存させない
+→LaravelとSQLの両方で書けるなら書いたほうがいい
+
+すでに作ったレコードの内容と同じなら保存させない
+
+
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tests', function (Blueprint $table) {
+            $table->id();
+            $table->integer("user_id")->nullable(false);
+            $table->string("name", 30)->nullable(false);
+            $table->string("to")->nullable(true);
+            $table->string("cc")->nullable(true);
+            $table->string("bcc")->nullable(true);
+            $table->string("subject")->nullable(true);
+            $table->string("letter_body")->nullable(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tests');
+    }
+};
+
+
+
+
+
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\TestController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/main', [TestController::class, 'index'])->middleware('auth');
+
+Route::get('/mypage', [TestController::class, 'myUrl']);
+
+Route::post('/main', [TestController::class, 'newUrl']);
+
+Route::post('/reg', [TestController::class, 'regNewUrl']);
+
+
+Laravel Breeze のログイン画面をカスタマイズするには、次の手順に従います:
+resources/views/auth フォルダにあるビューファイルを編集します。
+Tailwindユーティリティクラスを使用して UI をカスタマイズします。
+LaravelのBladeテンプレートにある「コンポーネント」を使用してデザインをカスタマイズします。
+Laravel Breeze は TailwindCSS を採用しているため、UI を自由にカスタマイズできます。
+
+id
+468880537883-tq1j9n9k3cg96bbf25jlgfnkcdbllakm.apps.googleusercontent.com
+
+secret
+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
+
+
+
+<?php
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/main', [TestController::class, 'index'])->middleware('auth');
+
+Route::get('/mypage', [TestController::class, 'myUrl'])->middleware('auth');
+
+Route::post('/main', [TestController::class, 'newUrl']);
+
+Route::post('/reg', [TestController::class, 'regNewUrl']);
+
+Route::get('/edit/{id}', [TestController::class, 'edit']);
+
+Route::post('/edit/{id}', [TestController::class, 'updateUrl']);
+
+Route::post('/save/{id}', [TestController::class, 'save']);
+
+Route::get('/delete/{id}', [TestController::class, 'delete']);
+
+require __DIR__.'/auth.php';
+
+

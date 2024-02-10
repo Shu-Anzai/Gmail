@@ -32,10 +32,22 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/main', [TestController::class, 'index'])->middleware('auth');
 
+Route::get('/test', [Testcontroller::class, 'test']);
+
 Route::get('/mypage', [TestController::class, 'myUrl'])->middleware('auth');
 
 Route::post('/main', [TestController::class, 'newUrl']);
 
+Route::post('/test', [TestController::class, 'newUrl']);
+
 Route::post('/reg', [TestController::class, 'regNewUrl']);
+
+Route::get('/edit/{id}', [TestController::class, 'edit']);
+
+Route::post('/edit/{id}', [TestController::class, 'updateUrl']);
+
+Route::post('/save/{id}', [TestController::class, 'save']);
+
+Route::get('/delete/{id}', [TestController::class, 'delete']);
 
 require __DIR__.'/auth.php';

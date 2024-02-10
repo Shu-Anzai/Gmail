@@ -9,39 +9,38 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <nav class="nav-bar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid d-flex">
-                <a class="navbar-brand" href="main">
+                <a class="navbar-brand mr-auto" href="https://mail.google.com/mail/u/0/#inbox?compose=new">
                     <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> UGRL
                 </a>
-
-                <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="mypage">mypage</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
-                    </li>
-                </ul>
+                <div class=" justify-content-end">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/mypage">mypage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
     <div class="container text-center">
         <div class="gy-2">
+
             {{-- フォーム追加ボタン --}}
-            <form method="post" class="form-group needs-toccbcc-validation" novalidate>
+            <form method="post" class="form-group">
                 <div class="row m-3 btn-group" role="group" aria-label="Basic example">
-                    <button type="button" name="tobtn" class="btn btn-outline-secondary">Add To</button>
-                    <button type="button" name="ccbtn" class="btn btn-outline-secondary">Add Cc</button>
-                    <button type="button" name="bccbtn" class="btn btn-outline-secondary">Add Bcc</button>
+                    <button type="button" name="tobtn" class="btn btn-outline-primary">Add To</button>
+                    <button type="button" name="ccbtn" class="btn btn-outline-primary">Add Cc</button>
+                    <button type="button" name="bccbtn" class="btn btn-outline-primary">Add Bcc</button>
                 </div>
 
                 {{-- Toの入力欄 --}}
                 <div class="row m-3" id="torow">
                     <div class="col-sm" name="inputdiv">
-                        <input type="email" id="To" name="To" class="form-control" placeholder="To" required>
-                        <div class='invalid-feedback'>メールアドレスの形式で入力してください。（空欄可）</div>
+                        <input type="email" name="To" class="form-control" placeholder="To">
                     </div>
                 </div>
 
@@ -50,15 +49,12 @@
                     <div class="col text-break" name="ResultTo"></div>
                 </div>
 
-                <input type="hidden" name="ToFinResult" value="defalut">
-
-
+                <input type="hidden" name="ToFinResult">
 
                 {{-- Ccの入力欄 --}}
                 <div class="row m-3" id="ccrow">
-                    <div class="col-sm" name="inputdiv">
-                        <input type="email" id="Cc" name="Cc" class="form-control" placeholder="Cc" required>
-                        <div class='invalid-feedback'>メールアドレスの形式で入力してください。（空欄可）</div>
+                    <div class="col-sm">
+                        <input type="email" name="Cc" class="form-control" placeholder="Cc">
                     </div>
                 </div>
 
@@ -67,13 +63,12 @@
                     <div class="col text-break" name="ResultCc"></div>
                 </div>
 
-                <input type="hidden" name="CcFinResult" value="defalut">
+                <input type="hidden" name="CcFinResult">
 
                 {{-- Bccの入力欄 --}}
                 <div class="row m-3" id="bccrow">
-                    <div class="col-sm" name="inputdiv">
-                        <input type="email" id="Bcc" name="Bcc" class="form-control" placeholder="Bcc" required>
-                        <div class='invalid-feedback'>メールアドレスの形式で入力してください。（空欄可）</div>
+                    <div class="col-sm">
+                        <input type="email" name="Bcc" class="form-control" placeholder="Bcc">
                     </div>
                 </div>
 
@@ -82,27 +77,26 @@
                     <div class="col text-break" name="ResultBcc"></div>
                 </div>
 
-                <input type="hidden" name="BccFinResult" value="defalut">
+                <input type="hidden" name="BccFinResult">
 
                 {{-- 件名の入力欄 --}}
                 <div class="row m-3">
                     <div class="col">
-                        <input type="text" name="subject" class="form-control" placeholder="件名" required>
+                        <input type="text" name="subject" class="form-control" placeholder="件名">
                     </div>
                 </div>
 
                 {{-- 本文の入力欄 --}}
                 <div class="row m-3">
                     <div class="col">
-                        <textarea name="letterBody" class="form-control" rows="5" placeholder="本文" required></textarea>
-                        <div class='invalid-feedback' id='feedback'></div>
+                        <textarea name="letterBody" class="form-control" rows="5" placeholder="本文"></textarea>
                     </div>
                 </div>
 
                 {{-- URLボタン --}}
                 <div class="row m-3 d-flex align-items-center justify-content-center">
                     <div class="col-2">
-                        <button type="submit" class="btn btn-outline-primary mr-2">URLを作成</button>
+                        <input type="submit" value="URLを作成" class="form-control">
                     </div>
                 </div>
                 @csrf
