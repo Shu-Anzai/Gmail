@@ -32,9 +32,9 @@
             {{-- フォーム追加ボタン --}}
             <form method="post" class="form-group needs-toccbcc-validation" novalidate>
                 <div class="row m-3 btn-group" role="group" aria-label="Basic example">
-                    <button type="button" name="tobtn" class="btn btn-outline-primary">Add To</button>
-                    <button type="button" name="ccbtn" class="btn btn-outline-primary">Add Cc</button>
-                    <button type="button" name="bccbtn" class="btn btn-outline-primary">Add Bcc</button>
+                    <button type="button" name="tobtn" class="btn btn-outline-secondary">Add To</button>
+                    <button type="button" name="ccbtn" class="btn btn-outline-secondary">Add Cc</button>
+                    <button type="button" name="bccbtn" class="btn btn-outline-secondary">Add Bcc</button>
                 </div>
 
                 {{-- Toの入力欄 --}}
@@ -50,7 +50,7 @@
                     <div class="col text-break" name="ResultTo"></div>
                 </div>
 
-                <input type="hidden" name="ToFinResult">
+                <input type="hidden" name="ToFinResult" value="defalut">
 
 
 
@@ -67,7 +67,7 @@
                     <div class="col text-break" name="ResultCc"></div>
                 </div>
 
-                <input type="hidden" name="CcFinResult">
+                <input type="hidden" name="CcFinResult" value="defalut">
 
                 {{-- Bccの入力欄 --}}
                 <div class="row m-3" id="bccrow">
@@ -82,7 +82,7 @@
                     <div class="col text-break" name="ResultBcc"></div>
                 </div>
 
-                <input type="hidden" name="BccFinResult">
+                <input type="hidden" name="BccFinResult" value="defalut">
 
                 {{-- 件名の入力欄 --}}
                 <div class="row m-3">
@@ -102,7 +102,7 @@
                 {{-- URLボタン --}}
                 <div class="row m-3 d-flex align-items-center justify-content-center">
                     <div class="col-2">
-                        <button type="submit" class="btn btn-outline-secondary mr-2">URLを作成</button>
+                        <button type="submit" class="btn btn-outline-primary mr-2">URLを作成</button>
                     </div>
                 </div>
                 @csrf

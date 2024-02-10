@@ -29,11 +29,6 @@
         </header>
         <div class="container text-center">
             <div class="gy-2">
-                @php
-                    if (isset($url)) {
-                        echo "<h1>必ず1つは埋めてください。</h1>";
-                    }
-                @endphp
                 <form action="/edit/{{$target_url[0]->id}}" method="post" class="form-group needs-toccbcc-validation" novalidate>
                     {{-- フォーム追加ボタン --}}
                     <div class="row m-3 btn-group" role="group" aria-label="Basic example">
@@ -48,15 +43,16 @@
                             @if ($to !== null)
                                 <div class="col-sm" name="inputdiv">
                                     <input type="email" id="To" name="To" value="{{ $to }}" class="form-control" placeholder="To" required>
+                                    <div class='invalid-feedback'>メールアドレスの形式で入力してください。（空欄可）</div>
                                 </div>
                             @endif
                         @endforeach
                     </div>
                     {{-- Toの確認欄 --}}
                     <div class="row m-3">
-                        <div class="col list-group" name="ResultTo"></div>
+                        <div class="col text-break" name="ResultTo"></div>
                     </div>
-                    <input type="hidden" name="ToFinResult">
+                    <input type="hidden" name="ToFinResult" value="default">
 
                     {{-- Ccの入力欄 --}}
                     <div class="row m-3" id="ccrow">
@@ -64,15 +60,16 @@
                             @if ($Cc !== null)
                                 <div class="col-sm">
                                     <input type="email" id="Cc" name="Cc" value="{{ $Cc }}" class="form-control" placeholder="Cc" required>
+                                    <div class='invalid-feedback'>メールアドレスの形式で入力してください。（空欄可）</div>
                                 </div>
                             @endif
                         @endforeach
                     </div>
                     {{-- Ccの確認欄 --}}
                     <div class="row m-3">
-                        <div class="col list-group" name="ResultCc"></div>
+                        <div class="col text-break" name="ResultCc"></div>
                     </div>
-                    <input type="hidden" name="CcFinResult">
+                    <input type="hidden" name="CcFinResult" value="default">
 
                     {{-- Bccの入力欄 --}}
                     <div class="row m-3" id="bccrow">
@@ -80,15 +77,16 @@
                             @if ($Bcc !== null)
                                 <div class="col-sm">
                                     <input type="email" id="Bcc" name="Bcc" value="{{ $Bcc }}" class="form-control" placeholder="Bcc" required>
+                                    <div class='invalid-feedback'>メールアドレスの形式で入力してください。（空欄可）</div>
                                 </div>
                             @endif
                         @endforeach
                     </div>
                     {{-- Bccの確認欄 --}}
                     <div class="row m-3">
-                        <div class="col list-group" name="ResultBcc"></div>
+                        <div class="col text-break" name="ResultBcc"></div>
                     </div>
-                    <input type="hidden" name="BccFinResult">
+                    <input type="hidden" name="BccFinResult" value="default">
 
                     {{-- 件名の入力欄 --}}
                     <div class="row m-3">
@@ -101,17 +99,14 @@
                     <div class="row m-3">
                         <div class="col">
                             <textarea name="letterBody" class="form-control" rows="5" placeholder="本文" required>{{$target_url[0]->letter_body}}</textarea>
-                            @php
-                                echo "<div class='invalid-feedback' id='feedback'></div>";
-                            @endphp
+                            <div class='invalid-feedback' id='feedback'></div>
                         </div>
                     </div>
 
                     {{-- URLボタン --}}
                     <div class="row m-3 d-flex align-items-center justify-content-center">
                         <div class="centered-buttons">
-                            <a href="/mypage" class="btn btn-outline-danger mr-2">MYPAGE</a>
-                            <button type="submit" class="btn btn-outline-secondary mr-2">URLを作成</button>
+                            <button type="submit" class="btn btn-outline-primary mr-2">URLを作成</button>
                         </div>
                     </div>
                     @csrf

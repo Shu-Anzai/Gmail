@@ -38,9 +38,9 @@
                 foreach ($urls as $url) {
 
                     $name = $url->name;
-                    $to = $testController->inputVal($url->to, "To:");
-                    $Cc = $testController->inputVal($url->cc, "Cc:");
-                    $Bcc = $testController->inputVal($url->bcc, "Bcc:");
+                    $to = $testController->inputVal($url->to, "To：");
+                    $Cc = $testController->inputVal($url->cc, "Cc：");
+                    $Bcc = $testController->inputVal($url->bcc, "Bcc：");
                     $subject = $testController->inputVal($url->subject, "件名：");
                     $letterBody = $url->letter_body;
                     $URL = $url->URL;
@@ -61,13 +61,13 @@
 
                             // 横に並べるための div を追加
                             echo "<div class='card-body'>";
-                                echo "<div class='d-flex justify-content-between mt-3'>";
+                                echo "<div class='d-flex justify-content-between mt-1'>";
                                     // OPEN ボタン
-                                    echo "<a href=".$URL." target='_blank' class='card-link btn btn-outline-primary mx-1'>OPEN</a>";
+                                    echo "<a href=".$URL." target='_blank' class='card-link btn btn-outline-primary mx-3'>OPEN</a>";
                                     // EDIT ボタン
-                                    echo "<form action='/edit/{$id}' method='get' class='mx-1'><button type='submit' class='btn btn-outline-primary'>EDIT</button></form>";
+                                    echo "<form action='/edit/{$id}' method='get' class='mx-3'><button type='submit' class='btn btn-outline-success'>EDIT</button></form>";
                                     // DELETE ボタン
-                                    echo "<form action='/delete/{$id}' method='get' class='mx-1'><button type='submit' class='btn btn-outline-danger'>DELETE</button></form>";
+                                    echo "<form action='/delete/{$id}' method='get' class='mx-3'><button type='submit' class='btn btn-outline-danger'>DELETE</button></form>";
                                 echo "</div>";
                             echo "</div>"; // card-body の終了
                         echo "</div>"; // card の終了
