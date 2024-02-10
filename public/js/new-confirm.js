@@ -1,17 +1,16 @@
-function copyToClipboard() {
-    let copyTarget = document.getElementById("url");
+let copyTarget = document.getElementById("url");
 
-    // コピー対象のテキストを選択する
-    copyTarget.select();
+document.getElementById("copyUrl").addEventListener('click', () => {
+    if (!navigator.clipboard) {
+        alert("このブラウザは対応していません");
+        return;
+    }
 
-    // 選択しているテキストをクリップボードにコピーする
-    document.execCommand("copy");
-
-    // テキスト選択を解除する
-    window.getSelection().removeAllRanges();
-    // コピーをお知らせする
-    alert("コピーできました！ : " + copyTarget.value);
-}
-
-// ボタンがクリックされたときにコピーする関数を呼び出す
-document.getElementById("copyUrl").addEventListener("click", copyToClipboard);
+    navigator.clipboard.writeText(copyTarget.value).then(
+        () => {
+        alert('URLをコピーしました。');
+        },
+        () => {
+        alert('コピーに失敗しました。');
+    });
+});

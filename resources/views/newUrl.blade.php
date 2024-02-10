@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <script src='{{ asset("/js/confirm.js") }}'></script>
+    <script src='{{ asset("/js/new-confirm.js") }}'></script>
 </body>
 
 </html>
