@@ -107,9 +107,10 @@
                         echo "<div class='invalid-feedback text-center' id='feedback'>入力してください</div>";
                     @endphp
                     <div class="centered-buttons">
-                        <a href="" class="btn btn-outline-danger back">TOP</a>                        <button type="button" class="btn btn-outline-primary" id="copyUrl">copy</button>
-                        <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>
-                        <button type="submit" class="btn btn-primary">保存</button>
+                        <a href="" class="btn btn-outline-danger back">TOP</a>
+                        <button type="button" class="btn btn-outline-success" id="copyUrl">COPY</button>
+                        <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">OPEN URL</a>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>
                     @csrf
                 </form>

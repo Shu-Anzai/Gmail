@@ -243,22 +243,57 @@ Array.from(forms).forEach(form => {
 
         // 未記入の入力欄の行を削除
         if (ToFinResult.value === "") {
+            console.log(ToFinResult);
             for (; torow.firstElementChild !== null ;) {
                 torow.removeChild(torow.firstElementChild);
             }
+        // 記入がある行は未記入の欄のみ削除
+        } else {
+            // Tosを通常の配列に変換
+            const ToArray = Array.from(Tos);
+
+            // 配列の中身一つ一つに対して条件を提示し、入力がないものはinputDivごと消す
+            ToArray.forEach(To => {
+                if (To.value === "") {
+                    To.parentNode.remove();
+                }
+            });
         }
+
         if (CcFinResult.value === "") {
-            console.log(ccrow);
             for (; ccrow.firstElementChild !== null ;) {
                 ccrow.removeChild(ccrow.firstElementChild);
             }
-            console.log(ccrow);
+        } else {
+            // Ccsを通常の配列に変換
+            const CcArray = Array.from(Ccs);
+
+            // 配列の中身一つ一つに対して条件を提示し、入力がないものはinputDivごと消す
+            CcArray.forEach(Cc => {
+                if (Cc.value === "") {
+                    Cc.parentNode.remove();
+                }
+            });
         }
+
         if (BccFinResult.value === "") {
             for (; bccrow.firstElementChild !== null ;) {
                 bccrow.removeChild(bccrow.firstElementChild);
             }
+        } else {
+            // Bccsを通常の配列に変換
+            const BccArray = Array.from(Bccs);
+
+            // 配列の中身一つ一つに対して条件を提示し、入力がないものはinputDivごと消す
+            BccArray.forEach(Bcc => {
+                if (Bcc.value === "") {
+                    Bcc.parentNode.remove();
+                }
+            });
         }
+        ConnectTo();
+        ConnectCc();
+        ConnectBcc();
 
         // バリデーション(全欄空欄)
         if ( ToFinResult.value == "" && CcFinResult.value == "" && BccFinResult.value == "" && subject.value == "" && letterBody.value == "" ) {
@@ -272,7 +307,6 @@ Array.from(forms).forEach(form => {
             feedback.textContent = "メールアドレスの形式で入力してください。（空欄可）";
         }
 
-        console.log(feedback.textContent);
         ConnectTo();
         ConnectCc();
         ConnectBcc();
