@@ -36,17 +36,17 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid d-flex">
-                <a class="navbar-brand" href="main">
+                <a class="navbar-brand get" href="/main">
                     <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> UGRL
                 </a>
 
                 <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" id="mypageButton" href="mypage">mypage</a>
+                        <a class="nav-link get" href="/mypage">mypage</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
+                        <a class="nav-link get" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
                     </li>
                 </ul>
             </div>
@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <script src='{{ asset("/js/new-confirm.js") }}'></script>
+    <script src='{{ asset("/js/confirm.js") }}'></script>
 </body>
 
 </html>

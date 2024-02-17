@@ -35,17 +35,17 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid d-flex">
-                <a class="navbar-brand" href="main">
+                <a class="navbar-brand get" href="/main">
                     <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> UGRL
                 </a>
 
                 <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" id="mypageButton" href="mypage">mypage</a>
+                        <a class="nav-link get" id="mypageButton" href="mypage">mypage</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
+                        <a class="nav-link get" href="https://mail.google.com/mail/u/0/#inbox?compose=new">Gmail</a>
                     </li>
                 </ul>
             </div>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="border rounded my-3">
                     {{-- 何故かこのpタグの下にだけ余計な余白が生まれてしまう --}}
-                    <p class="card-text p-2" id="url">URL:{{$url}}</p>
+                    <p class="card-text p-2" id="URL">URL:{{$url}}</p>
                     <input type='hidden' id='url' value="{{$url}}">
                 </div>
                 <form action="/save/{{$id}}" method="post" class="form-group my-2 needs-toccbcc-validation" novalidate>
@@ -107,7 +107,7 @@
                         echo "<div class='invalid-feedback text-center' id='feedback'>入力してください</div>";
                     @endphp
                     <div class="centered-buttons">
-                        <a href="/main" class="btn btn-outline-danger">TOP</a>
+                        <a href="/main" class="btn btn-outline-danger get">TOP</a>
                         <a href="/edit/{{$id}}" class="btn btn-outline-warning back">EDIT</a>
                         <button type="button" class="btn btn-outline-success" id="copyUrl">copy</button>
                         <a href="{{$url}}" target="_blank" class="btn btn-outline-primary">URLを開く</a>

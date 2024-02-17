@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>UGRL</title>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>    <title>UGRL</title>
 </head>
 <body>
     <header>
@@ -14,6 +14,7 @@
                 <a class="navbar-brand" href="main">
                     <img src="{{asset('storage/mail_FILL0_wght400_GRAD0_opsz24.png')}}"> UGRL
                 </a>
+                <i class="fi fi-rr-envelope"></i>
 
                 <!-- ml-auto を使用してボタンの間の余白を自動調整 -->
                 <ul class="navbar-nav ml-auto">

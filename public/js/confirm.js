@@ -27,17 +27,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// 編集画面からmypageへのボタンを押した際のアラート機能
+// 編集画面からmypageなどへのボタンを押した際のアラート機能
 document.addEventListener('DOMContentLoaded', function () {
-    var mypageButton = this.getElementById('mypageButton');
+    var WarningButtons = document.querySelectorAll('.get');
 
-    if (mypageButton) {
-        mypageButton.addEventListener('click', function (event) {
-            var isConfirmed = confirm('変更内容が破棄されます。よろしいですか？');
+    if (WarningButtons) {
+        WarningButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                var isConfirmed = confirm('変更内容が破棄されます。よろしいですか？');
 
-            if (!isConfirmed) {
-                event.preventDefault(); // ページの移動をキャンセル
-            }
+                if (!isConfirmed) {
+                    event.preventDefault(); // ページの移動をキャンセル
+                }
+            });
         });
     }
 });
